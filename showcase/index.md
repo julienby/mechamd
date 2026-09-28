@@ -11,7 +11,7 @@ haut à droite), sur grand écran et sur mobile.
 ## Typographie
 
 Le texte courant est en **Inter**, les titres en *Newsreader*. Une colonne de
-lecture d'environ soixante-cinq caractères, un interlignage généreux, et des
+lecture d'environ soixante-dix caractères, un interlignage généreux, et des
 [liens discrets mais visibles](#typographie). Le `code en ligne` reste lisible
 sans crier.
 
@@ -32,14 +32,40 @@ engine = Engine(project="mon-site/")
 html = engine.render("content/manip-b204.md")
 ```
 
+## section
+
+Une grande partie de page, avec son ancre. La variante `hero` ouvre une page.
+
+### hero
+
+:::section{.hero #hero-exemple}
+# Suivi thermique de la salle B204
+Deux semaines de mesures, trois capteurs, une carte thermique complète.
+[Lire le rapport](#section)
+:::
+
+### hero — avec image de fond
+
+:::section{.hero image=photos/salle.svg alt="Relevé topographique de la salle"}
+# Carte thermique
+Les isothermes relevées le 12 septembre, à 14 h.
+[Voir la carte](#section)
+:::
+
+### default
+
+:::section
+## Matériel
+Trois sondes DS18B20, une carte BOB et une batterie de 5 000 mAh. La section
+garde son ancre (`#matériel`) et accepte des blocs larges, comme une grille.
+:::
+
 ## card
 
 Un bloc de contenu autonome. Sans aucun attribut, mechamd choisit la variante
 à partir du contenu.
 
 ### default — cas général
-
-Titre, texte, lien d'action en bas ; toute la carte est cliquable.
 
 :::card
 ### Capteur DS18B20
@@ -57,8 +83,6 @@ inférieur à **0,2 °C** sur S1 et S3 ; S2 à surveiller.
 :::
 
 ### image — devinée
-
-Une image dans le contenu suffit à choisir la variante `image`.
 
 :::card
 ![Courbe de température sur deux semaines](photos/courbe.svg)
@@ -83,14 +107,101 @@ Deux semaines de mesures, trois capteurs, une carte thermique complète.
 Un fond d'accent remplace l'image absente.
 :::
 
-### image — texte long et image claire
+## grid
+
+Des blocs en colonnes : autant de colonnes que d'enfants, trois au plus. Une
+seule colonne sur mobile.
+
+### trois cartes, colonnes devinées
+
+::::grid
+:::card
+### DS18B20
+Sonde étanche, ±0,5 °C, bus 1-Wire.
+[Fiche](#grid)
+:::
 
 :::card
-![Carte électronique du prototype](photos/prototype.svg)
-### Premier prototype BOB, mars 2025
-Carte d'acquisition à base d'ESP32, trois entrées 1-Wire, alimentation par
-batterie. Le boîtier imprimé en PETG tient dans la main ; l'autonomie mesurée
-atteint neuf jours avec une mesure toutes les 30 secondes.
+### SHT31
+Température et humidité, bus I²C.
+[Fiche](#grid)
+:::
+
+:::card
+### BME280
+Température, humidité et pression.
+[Fiche](#grid)
+:::
+::::
+
+### variante fixée par la grille : `card=cover`
+
+::::grid{cols=3 card=cover}
+:::card
+![Courbe de température](photos/courbe.svg)
+## Mesures
+[Ouvrir](#grid)
+:::
+
+:::card
+![Relevé de la salle](photos/salle.svg)
+## Salle
+[Ouvrir](#grid)
+:::
+
+:::card{.image}
+![Carte du prototype](photos/prototype.svg)
+### Prototype
+Cette carte garde sa propre variante.
+:::
+::::
+
+## callout
+
+Un encadré qui se détache du texte. Le premier mot suffit à choisir la
+variante.
+
+:::callout
+Les mesures sont horodatées en UTC ; l'heure locale est calculée à l'affichage.
+:::
+
+:::callout
+Astuce : lancer `mecha serve` pendant l'écriture, la page se recharge seule.
+:::
+
+:::callout
+Attention : recalibrer la sonde après chaque déplacement.
+:::
+
+:::callout{.tip}
+### Avec un titre
+Un titre facultatif s'affiche à côté de l'étiquette. Les [liens](#callout)
+restent dans la couleur d'accent.
+:::
+
+## timeline
+
+Une chronologie écrite comme une liste de notes datées ; les dates sont
+affichées comme écrites.
+
+### default
+
+:::timeline
+- 2024 : Création du labo
+- mars 2025 : Premier prototype BOB
+  Carte d'acquisition ESP32, trois entrées 1-Wire, neuf jours d'autonomie.
+- 12/09/2026 : Déploiement en salle B204
+  Trois capteurs, deux semaines de mesure.
+:::
+
+### compact
+
+:::timeline{.compact}
+- 2026-09-01 | Commande des sondes
+- 2026-09-08 | Réception et contrôle
+- 2026-09-12 | Pose en salle B204
+  Hauteur 1,20 m, à 2 cm de la paroi.
+- 2026-09-26 | Fin de l'acquisition
 :::
 
 ## Ce qui n'est pas compris
