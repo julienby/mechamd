@@ -1,0 +1,5 @@
+{
+  "variant": "default",
+  "data": {"intro": "", "items": [], "done": 0, "total": 0},
+  "warnings": ["aucune tâche : écrire une liste « - [ ] tâche »"]
+}

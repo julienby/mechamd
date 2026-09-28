@@ -333,6 +333,20 @@ n'apporte rien, un pas plus long rate les ouvertures de porte.
 ```
 :::
 
+## todo
+
+Une liste de tâches `[ ]` / `[x]` ; l'avancement est compté.
+
+:::todo
+Avant la fin de l'acquisition :
+
+- [x] Commander les sondes
+- [x] Relever le journal de **S2**
+  Dérive de +1,1 °C quand le soleil touche la fenêtre.
+- [ ] Recalibrer S2
+- [ ] Rendre le rapport
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

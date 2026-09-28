@@ -1,0 +1,17 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "items": [
+      {"done": true, "text": "<p>Couper le courant</p>\n", "detail": ""},
+      {"done": false, "text": "<p>Retirer le capot</p>\n", "detail": ""},
+      {"done": false, "text": "<p>Remplacer la sonde</p>\n", "detail": ""}
+    ],
+    "done": 1,
+    "total": 3
+  },
+  "warnings": [
+    "« Remplacer la sonde » : pas de case, comptée à faire (écrire « - [ ] tâche »)",
+    "variante « checklist » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Avant la fin de l'acquisition :</p>\n",
+    "items": [
+      {
+        "done": true,
+        "text": "<p>Relever le journal de <strong>S2</strong></p>\n",
+        "detail": "<p>Dérive de +1,1 °C quand le soleil touche la fenêtre.</p>\n"
+      },
+      {
+        "done": false,
+        "text": "<p>Recalibrer S2 (voir la <a href=\"#recalibrage\">procédure</a>)</p>\n",
+        "detail": ""
+      }
+    ],
+    "done": 1,
+    "total": 2
+  }
+}

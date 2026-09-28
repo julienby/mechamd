@@ -1,0 +1,14 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "items": [
+      {"done": true, "text": "<p>Commander les sondes</p>\n", "detail": ""},
+      {"done": true, "text": "<p>Contrôler les sondes à réception</p>\n", "detail": ""},
+      {"done": false, "text": "<p>Poser en salle B204</p>\n", "detail": ""},
+      {"done": false, "text": "<p>Lancer l'acquisition</p>\n", "detail": ""}
+    ],
+    "done": 2,
+    "total": 4
+  }
+}

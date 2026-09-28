@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : **J3 — catalogue** (lot 1 fait ; lot 2 : quote, details, todo, links, compare)
-- Prochaine action : directive `todo`.
+- Prochaine action : directive `links`.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -62,8 +62,8 @@ Pistes notées pour plus tard :
 - ✅ `stats` (default ; colonnes = nombre de chiffres, 4 au plus) — 4 exemples
 - ✅ `quote` (default, pull ; attribution sur la dernière ligne « — auteur ») — 4 exemples
 - ✅ `details` (default fermé, open ; résumé = premier titre, `summary=` ou première ligne) — 4 exemples
-- 🔄 `todo`
-- ⬜ `links`
+- ✅ `todo` (default ; `[ ]`/`[x]`, avancement fait/total) — 4 exemples
+- 🔄 `links`
 - ⬜ `compare`
 
 ## Décisions

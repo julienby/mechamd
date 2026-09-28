@@ -1,0 +1,31 @@
+{# todo · default : liste de tâches et barre d'avancement. #}
+<div {{ root_attrs(block) }} class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+  {% if intro %}
+  <div class="mecha-prose mb-4 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ intro | safe }}</div>
+  {% endif %}
+  {% if total %}
+  <div class="mb-4 flex items-center gap-3">
+    <progress value="{{ done }}" max="{{ total }}" class="w-full accent-indigo-600 dark:accent-indigo-500">{{ done }} sur {{ total }}</progress>
+    <span class="shrink-0 text-xs font-semibold tracking-widest text-stone-500 uppercase dark:text-stone-400">{{ done }} sur {{ total }}</span>
+  </div>
+  <ul class="space-y-3">
+    {% for item in items %}
+    <li class="flex gap-3">
+      {% if item.done %}
+      <span aria-hidden="true" class="mt-1 flex size-5 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-xs font-semibold text-white dark:bg-indigo-500">✓</span>
+      <span class="sr-only">Fait :</span>
+      {% else %}
+      <span aria-hidden="true" class="mt-1 size-5 shrink-0 rounded-full border border-stone-300 dark:border-stone-700"></span>
+      <span class="sr-only">À faire :</span>
+      {% endif %}
+      <div class="min-w-0">
+        <div class="mecha-prose text-base leading-relaxed {{ 'text-stone-500 line-through dark:text-stone-400' if item.done else 'text-stone-900 dark:text-stone-50' }}">{{ item.text | safe }}</div>
+        {% if item.detail %}
+        <div class="mecha-prose mt-1 text-sm text-stone-500 dark:text-stone-400">{{ item.detail | safe }}</div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
