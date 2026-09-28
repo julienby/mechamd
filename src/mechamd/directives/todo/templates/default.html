@@ -5,7 +5,9 @@
   {% endif %}
   {% if total %}
   <div class="mb-4 flex items-center gap-3">
-    <progress value="{{ done }}" max="{{ total }}" class="w-full accent-indigo-600 dark:accent-indigo-500">{{ done }} sur {{ total }}</progress>
+    <div role="progressbar" aria-valuenow="{{ done }}" aria-valuemin="0" aria-valuemax="{{ total }}" aria-label="Avancement" class="h-2 w-full rounded-full bg-stone-100 dark:bg-stone-800/60">
+      <div class="h-full rounded-full bg-indigo-600 dark:bg-indigo-500" style="width: {{ (100 * done / total) | round | int }}%"></div>
+    </div>
     <span class="shrink-0 text-xs font-semibold tracking-widest text-stone-500 uppercase dark:text-stone-400">{{ done }} sur {{ total }}</span>
   </div>
   <ul class="space-y-3">
