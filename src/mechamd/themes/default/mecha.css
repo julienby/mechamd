@@ -115,7 +115,8 @@
   .mecha-flow :where(pre) {
     @apply overflow-x-auto rounded-lg bg-stone-900 p-4 font-mono text-sm leading-relaxed text-stone-100 dark:bg-stone-900;
   }
-  .mecha-flow :where(blockquote) {
+  .mecha-flow > :where(blockquote),
+  .mecha-prose :where(blockquote) {
     @apply border-l-2 border-indigo-300 pl-6 font-serif text-stone-900 italic dark:border-indigo-500/50 dark:text-stone-50;
   }
   .mecha-flow :where(hr) {
