@@ -1,0 +1,11 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "stats": [
+      {"value": "48 h", "label": "d'acquisition", "detail": ""},
+      {"value": "3", "label": "sondes DS18B20", "detail": ""},
+      {"value": "5 760", "label": "mesures par sonde", "detail": ""}
+    ]
+  }
+}

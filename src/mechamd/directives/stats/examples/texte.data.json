@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Bilan de la manip B204 :</p>\n",
+    "stats": [
+      {"value": "±0,2 °C", "label": "écart après recalibrage", "detail": "<p>Sur S1 et S3 ; S2 reste à surveiller.</p>\n"},
+      {"value": "99,8 %", "label": "mesures valides", "detail": ""}
+    ]
+  }
+}

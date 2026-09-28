@@ -26,8 +26,9 @@ Mise en page choisie dans le frontmatter : `layout: article` (défaut, avec
 sommaire, date et tags), `page` (sans sommaire ni méta) ou `notes` (compact).
 Un projet ajoute un layout dans `theme/layouts/<nom>.html`.
 
-Directives fournies : `card`, `grid`, `callout`, `timeline`, `section` (voir le
-`README.md` de chacune dans `src/mechamd/directives/`). La vitrine
+Directives fournies : `card`, `grid`, `callout`, `timeline`, `section`, `figure`,
+`steps`, `specs`, `stats` (voir le `README.md` de chacune dans
+`src/mechamd/directives/`). La vitrine
 (`showcase/index.md`) les montre toutes : `mecha serve showcase`.
 
 ## Développement

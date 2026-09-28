@@ -282,6 +282,18 @@ Sondes | 3
 Salle | B204
 :::
 
+## stats
+
+Quelques chiffres clés : « valeur : libellé », une tuile par chiffre.
+
+:::stats
+- 48 h : d'acquisition
+- 3 : sondes DS18B20
+- 5 760 : mesures par sonde
+- ±0,2 °C : écart après recalibrage
+  Sur S1 et S3 ; S2 reste à surveiller.
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

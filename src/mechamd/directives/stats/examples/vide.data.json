@@ -1,0 +1,8 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Les chiffres viendront après la manip.</p>\n",
+    "stats": []
+  },
+  "warnings": ["aucun chiffre : écrire une liste « - valeur : libellé »"]
+}

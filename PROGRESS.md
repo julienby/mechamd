@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : **J3 — catalogue** (lot 1 : figure, steps, specs, stats)
-- Prochaine action : directive `stats`.
+- Prochaine action : proposer le lot 2 à l'humain.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -59,7 +59,7 @@ Pistes notées pour plus tard :
 - ✅ `figure` (default, wide, gallery ; galerie devinée à 2 images) — 5 exemples
 - ✅ `steps` (default, compact) — 4 exemples
 - ✅ `specs` (default, inline ; séparateur `:` ou `|`) — 4 exemples
-- 🔄 `stats`
+- ✅ `stats` (default ; colonnes = nombre de chiffres, 4 au plus) — 4 exemples
 
 ## Décisions
 
@@ -85,3 +85,4 @@ Pistes notées pour plus tard :
   Correction : les styles de listes du texte s'appliquaient aux listes des templates (timeline).
 - 2026-09-28 — Layouts `article`, `page`, `notes` choisis par le frontmatter ; version de départ,
   à affiner.
+- 2026-09-28 — J3 lot 1 : figure, steps, specs, stats, ajoutées à la vitrine.

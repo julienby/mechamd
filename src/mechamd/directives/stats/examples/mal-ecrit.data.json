@@ -1,0 +1,27 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "stats": [
+      {
+        "value": "12",
+        "label": "jours",
+        "detail": ""
+      },
+      {
+        "value": "trois sondes",
+        "label": "",
+        "detail": ""
+      },
+      {
+        "value": "9 j",
+        "label": "autonomie",
+        "detail": ""
+      }
+    ]
+  },
+  "warnings": [
+    "« trois sondes » : écrire « valeur : libellé »",
+    "variante « gros » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}
