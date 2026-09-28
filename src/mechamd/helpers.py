@@ -8,6 +8,7 @@ dans un bloc de code.
 from __future__ import annotations
 
 import re
+import textwrap
 from dataclasses import dataclass
 
 _HEADING_RE = re.compile(r"^ {0,3}(#{1,6})[ \t]+(.*?)(?:[ \t]+#+)?[ \t]*$")
@@ -82,3 +83,117 @@ def trailing_link(text: str) -> tuple[Link | None, str]:
     if match is None:
         return None, text.strip("\n")
     return Link(href=match.group(2), text=match.group(1).strip()), _join(lines[:-1])
+
+
+# --- dates approximatives ------------------------------------------------
+
+MONTHS = {
+    "janvier": 1, "janv": 1, "jan": 1,
+    "février": 2, "fevrier": 2, "févr": 2, "fevr": 2, "fév": 2, "fev": 2,
+    "mars": 3,
+    "avril": 4, "avr": 4,
+    "mai": 5,
+    "juin": 6,
+    "juillet": 7, "juil": 7,
+    "août": 8, "aout": 8,
+    "septembre": 9, "sept": 9, "sep": 9,
+    "octobre": 10, "oct": 10,
+    "novembre": 11, "nov": 11,
+    "décembre": 12, "decembre": 12, "déc": 12, "dec": 12,
+}  # fmt: skip
+
+_YEAR = r"(?P<y>\d{4})"
+_DATE_PATTERNS = [
+    re.compile(rf"^{_YEAR}$"),
+    re.compile(rf"^{_YEAR}-(?P<m>\d{{1,2}})(?:-(?P<d>\d{{1,2}}))?$"),
+    re.compile(rf"^(?P<d>\d{{1,2}})[/.](?P<m>\d{{1,2}})[/.]{_YEAR}$"),
+    re.compile(rf"^(?P<m>\d{{1,2}})[/.]{_YEAR}$"),
+    re.compile(rf"^(?:(?P<d>\d{{1,2}})(?:er)?\s+)?(?P<mn>[^\W\d_]+)\.?\s+{_YEAR}$"),
+]
+
+
+@dataclass(frozen=True)
+class ApproxDate:
+    """Une date telle qu'écrite, avec sa forme ISO à la précision connue."""
+
+    text: str
+    iso: str
+    """`2024`, `2025-03` ou `2026-09-12` : utilisable dans `<time datetime=…>`."""
+    precision: str
+    """`year`, `month` ou `day`."""
+
+
+def parse_date(text: str) -> ApproxDate | None:
+    """Lit « 2024 », « mars 2025 », « 12 mars 2025 », « 12/09/2026 », « 2026-09-12 »."""
+    raw = text.strip()
+    for pattern in _DATE_PATTERNS:
+        match = pattern.match(raw.lower())
+        if match is None:
+            continue
+        parts = match.groupdict()
+        year = int(parts["y"])
+        month_name = parts.get("mn")
+        if month_name is not None:
+            month: int | None = MONTHS.get(month_name)
+            if month is None:
+                return None
+        else:
+            month = int(parts["m"]) if parts.get("m") else None
+        day = int(parts["d"]) if parts.get("d") else None
+        if month is not None and not 1 <= month <= 12:
+            return None
+        if day is not None and not 1 <= day <= 31:
+            return None
+        if month is None:
+            return ApproxDate(raw, f"{year:04d}", "year")
+        if day is None:
+            return ApproxDate(raw, f"{year:04d}-{month:02d}", "month")
+        return ApproxDate(raw, f"{year:04d}-{month:02d}-{day:02d}", "day")
+    return None
+
+
+# --- listes ---------------------------------------------------------------
+
+_ITEM_RE = re.compile(r"^(?P<indent> {0,3})(?:[-*+]|\d{1,9}[.)])(?:[ \t]+(?P<text>.*))?$")
+
+
+@dataclass(frozen=True)
+class Item:
+    """Un élément de liste : sa première ligne, puis la suite (désindentée)."""
+
+    text: str
+    body: str
+    line: int
+    """Ligne de l'élément dans le texte (1-indexée)."""
+
+
+def split_items(text: str) -> tuple[list[Item], str]:
+    """Éléments de premier niveau d'une liste Markdown ; rend (éléments, texte hors liste).
+
+    Les lignes indentées qui suivent un élément forment son `body`. Les lignes non
+    indentées qui ne sont pas des éléments sont rendues à part, dans l'ordre.
+    """
+    items: list[Item] = []
+    outside: list[str] = []
+    head: str | None = None
+    head_line = 0
+    body: list[str] = []
+
+    def flush() -> None:
+        if head is not None:
+            items.append(Item(head.strip(), textwrap.dedent("\n".join(body)).strip(), head_line))
+
+    lines = text.splitlines()
+    for k, (line, ok) in enumerate(zip(lines, _outside_code(lines), strict=True)):
+        match = _ITEM_RE.match(line) if ok else None
+        if match:
+            flush()
+            head, head_line, body = match.group("text") or "", k + 1, []
+        elif head is not None and (not line.strip() or line[:1] in (" ", "\t") or not ok):
+            body.append(line)
+        else:
+            flush()
+            head, body = None, []
+            outside.append(line)
+    flush()
+    return items, "\n".join(outside).strip("\n")
