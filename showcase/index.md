@@ -358,6 +358,26 @@ Des liens commentés : « [titre](url) : description », ou une URL nue.
 - [Spécification mechamd](SPEC.md) : la référence du projet
 :::
 
+## compare
+
+Des options côte à côte : un titre par option, une colonne par titre.
+
+:::compare
+Trois façons d'alimenter la carte BOB :
+
+### Batterie
+- 9 jours d'autonomie
+- aucun câble à tirer
+
+### Secteur
+- autonomie illimitée
+- une prise à moins de 2 m
+
+### Panneau solaire
+- autonome d'avril à septembre
+- à poser près d'une fenêtre
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

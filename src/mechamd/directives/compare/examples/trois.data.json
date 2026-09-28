@@ -1,0 +1,14 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Trois façons d'alimenter la carte BOB :</p>\n",
+    "columns": [
+      {
+        "title": "Batterie",
+        "body": "<ul>\n<li>9 jours d'autonomie</li>\n<li>aucun câble</li>\n</ul>\n<h3 id=\"limite\">Limite</h3>\n<p>Recharge à prévoir.</p>\n"
+      },
+      {"title": "Secteur", "body": "<ul>\n<li>illimité</li>\n</ul>\n"},
+      {"title": "Panneau solaire", "body": "<ul>\n<li>autonome en été</li>\n</ul>\n"}
+    ]
+  }
+}

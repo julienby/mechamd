@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "columns": [
+      {"title": "DS18B20", "body": "<p>Étanche, bus 1-Wire, ±0,5 °C.</p>\n"},
+      {"title": "SHT31", "body": "<p>Température et humidité, bus I²C, ±0,3 °C.</p>\n"}
+    ]
+  }
+}

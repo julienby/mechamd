@@ -1,0 +1,16 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "columns": [
+      {
+        "title": "Avant recalibrage",
+        "body": "<pre><code class=\"language-sh\"># écart S2\n+1,1 °C\n</code></pre>\n"
+      }
+    ]
+  },
+  "warnings": [
+    "une seule colonne : écrire un titre par option comparée",
+    "variante « tableau » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}

@@ -1,0 +1,3 @@
+:::compare
+Rien à comparer.
+:::

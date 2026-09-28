@@ -1,0 +1,5 @@
+{
+  "variant": "default",
+  "data": {"intro": "<p>Rien à comparer.</p>\n", "columns": []},
+  "warnings": ["aucune colonne : écrire un titre par option comparée"]
+}

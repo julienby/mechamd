@@ -4,8 +4,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J3 — catalogue** (lot 1 fait ; lot 2 : quote, details, todo, links, compare)
-- Prochaine action : directive `compare`.
+- Jalon actif : **J3 — catalogue** (lots 1 et 2 faits)
+- Prochaine action : vérification visuelle du lot 2, push, CI verte.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -64,7 +64,7 @@ Pistes notées pour plus tard :
 - ✅ `details` (default fermé, open ; résumé = premier titre, `summary=` ou première ligne) — 4 exemples
 - ✅ `todo` (default ; `[ ]`/`[x]`, avancement fait/total) — 4 exemples
 - ✅ `links` (default ; `[titre](url) : description` ou URL nue, domaine affiché) — 4 exemples
-- 🔄 `compare`
+- ✅ `compare` (default ; une colonne par titre, 4 au plus par ligne) — 4 exemples
 
 ## Décisions
 
@@ -91,3 +91,4 @@ Pistes notées pour plus tard :
 - 2026-09-28 — Layouts `article`, `page`, `notes` choisis par le frontmatter ; version de départ,
   à affiner.
 - 2026-09-28 — J3 lot 1 : figure, steps, specs, stats, ajoutées à la vitrine.
+- 2026-09-28 — J3 lot 2 : quote, details, todo, links, compare, ajoutées à la vitrine.
