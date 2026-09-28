@@ -40,6 +40,29 @@ def cmd_test(args: argparse.Namespace) -> int:
     return 1 if failures else 0
 
 
+def cmd_explain(args: argparse.Namespace) -> int:
+    engine = Engine(project=args.project)
+    for error in engine.load_errors:
+        print(f"! chargement : {error}")
+    try:
+        page = engine.render_page(args.file)
+    except (OSError, ValueError) as exc:
+        print(f"✗ {exc}")
+        return 1
+    print(f"{args.file} — « {page.title} »")
+    if not page.blocks:
+        print("  aucun bloc de directive")
+    for report in page.blocks:
+        mark = "" if report.known else "  [non compris]"
+        print(f"  ligne {report.line:<4} {report.name} → {report.variant} ({report.reason}){mark}")
+        for warning in report.warnings:
+            print(f"             ! {warning}")
+    other = [w for w in page.warnings if not w.startswith("ligne ")]
+    for warning in other:
+        print(f"  ! {warning}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="mecha", description="mechamd : Markdown → pages web.")
     parser.add_argument("--version", action="version", version=f"mechamd {__version__}")
@@ -49,6 +72,13 @@ def build_parser() -> argparse.ArgumentParser:
     test.add_argument("directive", nargs="?", help="nom de la directive (toutes par défaut)")
     test.add_argument("-p", "--project", default=".", help="dossier du projet (défaut : .)")
     test.set_defaults(func=cmd_test)
+
+    explain = sub.add_parser(
+        "explain", help="variante retenue et raison pour chaque bloc, plus les avertissements"
+    )
+    explain.add_argument("file", help="document mechamd (.md), relatif au projet")
+    explain.add_argument("-p", "--project", default=".", help="dossier du projet (défaut : .)")
+    explain.set_defaults(func=cmd_explain)
     return parser
 
 
