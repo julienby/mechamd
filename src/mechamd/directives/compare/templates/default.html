@@ -2,7 +2,7 @@
 {% set widths = {0: "", 1: "", 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3"} %}
 <div {{ root_attrs(block) }} class="mx-auto max-w-5xl">
   {% if intro %}
-  <div class="mecha-prose mb-6 text-base leading-relaxed">{{ intro | safe }}</div>
+  <div class="mecha-prose mx-auto mb-6 max-w-2xl text-base leading-relaxed">{{ intro | safe }}</div>
   {% endif %}
   <div class="grid gap-6 {{ widths.get(columns | length, "sm:grid-cols-2 lg:grid-cols-4") }}">
     {% for column in columns %}
