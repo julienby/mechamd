@@ -1,0 +1,127 @@
+/* Thème default de mechamd — applique tokens.md. Compilé par Tailwind CSS v4. */
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../directives";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    @apply bg-stone-50 font-sans text-stone-700 antialiased dark:bg-stone-950 dark:text-stone-300;
+    font-feature-settings: "cv11", "ss01";
+    color-scheme: light;
+  }
+  body {
+    @apply bg-stone-50 dark:bg-stone-950;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  ::selection {
+    @apply bg-indigo-100 text-stone-900 dark:bg-indigo-500/30 dark:text-stone-50;
+  }
+
+  /* Colonne de lecture : chaque élément du document tient dans max-w-2xl,
+     sauf si son template choisit une autre largeur (spécificité nulle). */
+  .mecha-flow > :where(*) {
+    @apply mx-auto max-w-2xl;
+  }
+  .mecha-flow > :where(* + *) {
+    @apply mt-6;
+  }
+  .mecha-flow > :where([data-mecha]) {
+    @apply my-12;
+  }
+  .mecha-flow > :where(h2) {
+    @apply mt-16;
+  }
+  .mecha-flow > :where(h3) {
+    @apply mt-12;
+  }
+}
+
+@layer components {
+  /* Markdown courant : dans le document et dans le corps des blocs. */
+  .mecha-prose :where(p, ul, ol, pre, blockquote, table, figure) + :where(*) {
+    @apply mt-3;
+  }
+  .mecha-flow :where(p, li) {
+    @apply text-pretty;
+  }
+  .mecha-flow > :where(p, ul, ol, blockquote) {
+    @apply text-lg leading-relaxed;
+  }
+  .mecha-flow :where(h1, h2, h3, h4) {
+    @apply font-serif text-balance text-stone-900 dark:text-stone-50;
+  }
+  .mecha-flow > :where(h1) {
+    @apply text-4xl leading-tight font-medium tracking-tight;
+  }
+  .mecha-flow > :where(h2) {
+    @apply text-3xl leading-tight font-medium tracking-tight;
+  }
+  .mecha-flow > :where(h3) {
+    @apply text-xl leading-snug font-semibold;
+  }
+  .mecha-flow > :where(h4) {
+    @apply text-lg font-semibold;
+  }
+  .mecha-flow :where(h2, h3)[id] {
+    @apply scroll-mt-8;
+  }
+
+  .mecha-flow > :where(p, ul, ol, blockquote, table) :where(a),
+  .mecha-prose :where(a) {
+    @apply relative z-10 font-medium text-indigo-700 underline decoration-indigo-300 underline-offset-4 transition duration-200 hover:decoration-indigo-600 dark:text-indigo-300 dark:decoration-indigo-500/50 dark:hover:decoration-indigo-300;
+  }
+  .mecha-flow :where(strong) {
+    @apply font-semibold text-stone-900 dark:text-stone-50;
+  }
+  .mecha-flow :where(ul) {
+    @apply list-disc pl-6 marker:text-stone-400 dark:marker:text-stone-600;
+  }
+  .mecha-flow :where(ol) {
+    @apply list-decimal pl-6 marker:text-stone-500 dark:marker:text-stone-400;
+  }
+  .mecha-flow :where(li + li) {
+    @apply mt-1;
+  }
+  .mecha-flow :where(:not(pre) > code) {
+    @apply rounded-lg bg-stone-100 px-1.5 py-0.5 font-mono text-sm text-stone-900 dark:bg-stone-800/60 dark:text-stone-100;
+  }
+  .mecha-flow :where(pre) {
+    @apply overflow-x-auto rounded-lg bg-stone-900 p-4 font-mono text-sm leading-relaxed text-stone-100 dark:bg-stone-900;
+  }
+  .mecha-flow :where(blockquote) {
+    @apply border-l-2 border-indigo-300 pl-6 font-serif text-stone-900 italic dark:border-indigo-500/50 dark:text-stone-50;
+  }
+  .mecha-flow :where(hr) {
+    @apply my-12 border-stone-200 dark:border-stone-800;
+  }
+  .mecha-flow :where(table) {
+    @apply w-full text-left text-sm;
+  }
+  .mecha-flow :where(th) {
+    @apply border-b border-stone-200 pb-2 font-semibold text-stone-900 dark:border-stone-800 dark:text-stone-50;
+  }
+  .mecha-flow :where(td) {
+    @apply border-b border-stone-200 py-2 dark:border-stone-800;
+  }
+  .mecha-flow > :where(p) > :where(img) {
+    @apply rounded-lg;
+  }
+
+  /* Texte posé sur une image ou un fond d'accent. */
+  .mecha-prose-invert :where(a) {
+    @apply text-white decoration-white/50 hover:decoration-white dark:text-white dark:decoration-white/50;
+  }
+  .mecha-prose-invert :where(strong) {
+    @apply text-white dark:text-white;
+  }
+}
