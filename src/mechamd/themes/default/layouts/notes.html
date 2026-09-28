@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{# Prise de notes, suivi de manip : date et tags en tête, titre et rythme resserrés. #}
+{% block main %}
+  <div class="mx-auto max-w-5xl px-4 pb-16 sm:px-6">
+    <article class="mecha-flow mecha-compact">
+      <header class="mt-4 mb-8">
+        {% if page.meta.get('date') or page.meta.get('tags') %}
+        <p class="flex flex-wrap items-center gap-2 text-sm text-stone-500 dark:text-stone-400">
+          {% if page.meta.get('date') %}<time datetime="{{ page.meta.date }}" class="font-medium">{{ page.meta.date }}</time>{% endif %}
+          {% for tag in page.meta.get('tags') or [] %}
+          <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold tracking-widest text-indigo-700 uppercase dark:bg-indigo-500/20 dark:text-indigo-300">{{ tag }}</span>
+          {% endfor %}
+        </p>
+        {% endif %}
+        {% if not page.has_h1 %}
+        <h1 class="mt-2 font-serif text-4xl leading-tight font-medium tracking-tight text-balance text-stone-900 dark:text-stone-50">{{ page.title }}</h1>
+        {% endif %}
+      </header>
+{{ content }}
+    </article>
+  </div>
+{% endblock %}

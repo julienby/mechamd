@@ -99,6 +99,16 @@ bordure. Rien ne bouge sauf un léger `hover:-translate-y-0.5` des cartes cliqua
   restent dans la colonne de lecture.
 - **Page** : gouttières `px-4` (mobile) à `px-6` (`sm:`).
 
+## Layouts
+
+Choisis par le frontmatter (`layout:`), défaut `article`.
+
+| Layout | Pour | En-tête de contenu | Rythme |
+| --- | --- | --- | --- |
+| `article` | billet, page de doc | sommaire (≥ 3 `##`), date, tags, titre `text-5xl` | celui du document |
+| `page` | accueil, vitrine | titre `text-5xl` seul (si pas de `#`) | celui du document |
+| `notes` | prise de notes, suivi de manip | ligne date + tags, titre `text-4xl` | resserré : `mt-4` entre éléments, `my-8` autour d'un bloc, `mt-12` avant un `h2`, `mt-8` avant un `h3` |
+
 ## Mode sombre
 
 Chaque couleur a son équivalent sombre ci-dessus ; un template écrit toujours

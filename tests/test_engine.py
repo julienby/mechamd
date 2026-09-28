@@ -155,3 +155,45 @@ def test_layout_toc_and_title(engine: Engine) -> None:
     assert 'aria-label="Sommaire"' in page.html
     assert 'href="#un"' in page.html
     assert "<h1" in page.html and "labo" in page.html
+
+
+def test_layout_article_by_default(engine: Engine) -> None:
+    page = engine.render_source("## Un\n\n## Deux\n\n## Trois\n")
+    assert 'data-layout="article"' in page.html
+    assert 'aria-label="Sommaire"' in page.html
+
+
+def test_layout_page_has_no_toc_nor_meta(engine: Engine) -> None:
+    text = "---\nlayout: page\ntags: [labo]\n---\n# Accueil\n\n## Un\n\n## Deux\n\n## Trois\n"
+    page = engine.render_source(text)
+    assert 'data-layout="page"' in page.html
+    assert 'aria-label="Sommaire"' not in page.html
+    assert "labo" not in page.html
+    assert page.warnings == []
+
+
+def test_layout_notes(engine: Engine) -> None:
+    page = engine.render_source("---\nlayout: notes\ndate: 2026-09-12\n---\nUne note.\n")
+    assert 'data-layout="notes"' in page.html
+    assert "2026-09-12" in page.html
+
+
+def test_layout_unknown_falls_back_to_article(engine: Engine) -> None:
+    page = engine.render_source("---\nlayout: magazine\n---\nTexte.\n")
+    assert 'data-layout="article"' in page.html
+    assert page.warnings == ["layout inconnu « magazine » : article utilisé"]
+
+
+def test_layout_from_project_theme(tmp_path: Path) -> None:
+    (tmp_path / "theme" / "layouts").mkdir(parents=True)
+    (tmp_path / "theme" / "layouts" / "slide.html").write_text(
+        '{% extends "base.html" %}{% block main %}<section>{{ content }}</section>{% endblock %}'
+    )
+    (tmp_path / "theme" / "base.html").write_text(
+        '<body data-layout="{{ page.layout }}">{% block main %}{% endblock %}</body>'
+    )
+    project = Engine(project=tmp_path)
+    page = project.render_source("---\nlayout: slide\n---\nTexte.\n")
+    assert page.html == '<body data-layout="slide"><section><p>Texte.</p>\n</section></body>'
+    article = project.render_source("Texte.\n").html
+    assert article.startswith('<body data-layout="article">')

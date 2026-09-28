@@ -20,6 +20,7 @@ from jinja2 import (
     FileSystemLoader,
     PrefixLoader,
     StrictUndefined,
+    TemplateNotFound,
     select_autoescape,
 )
 from markdown_it.token import Token
@@ -178,9 +179,16 @@ class Engine:
         ctx.reports.sort(key=lambda r: r.line)  # enfants rendus avant leur parent
         for report in ctx.reports:
             warnings.extend(f"ligne {report.line} ({report.name}) : {w}" for w in report.warnings)
-        layout = self.jinja.get_template("layout.html")
+        layout_name = str(meta.get("layout") or "article")
+        try:
+            layout = self.jinja.get_template(f"layouts/{layout_name}.html")
+        except TemplateNotFound:
+            warnings.append(f"layout inconnu « {layout_name} » : article utilisé")
+            layout_name = "article"
+            layout = self.jinja.get_template("layouts/article.html")
         html = layout.render(
             page={
+                "layout": layout_name,
                 "title": title,
                 "meta": meta,
                 "warnings": warnings,

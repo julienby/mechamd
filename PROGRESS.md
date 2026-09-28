@@ -48,6 +48,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
   aperçu mis à jour dans l'artifact privé
 - ✅ Toutes les directives vertes : 19/19 exemples ; 48 tests pytest (couverture 98 %) sur 3.11–3.13
 
+- ✅ Frontmatter `layout:` (`article`, `page`, `notes`) : `base.html` + `layouts/` — ADR 0006
+
 Pistes notées pour plus tard :
 - les titres des `section` n'apparaissent pas dans le sommaire (seuls les `##` du document) ;
 - polices chargées depuis Google Fonts : à héberger dans le thème avant J4 (hors-ligne).
@@ -59,6 +61,7 @@ Pistes notées pour plus tard :
 - ADR 0003 — précisions du contrat `Block` (✅ validée)
 - ADR 0004 — direction visuelle du thème default (✅ validée, version de départ)
 - ADR 0005 — build, serveur live et compilation CSS
+- ADR 0006 — layouts de page (`base.html` + `layouts/`)
 
 ## Journal
 
@@ -73,3 +76,5 @@ Pistes notées pour plus tard :
   `mecha explain`. Passage à J2.
 - 2026-09-28 — J2 : callout, timeline, section, grid ; CSS Tailwind, `mecha build`, `mecha serve`.
   Correction : les styles de listes du texte s'appliquaient aux listes des templates (timeline).
+- 2026-09-28 — Layouts `article`, `page`, `notes` choisis par le frontmatter ; version de départ,
+  à affiner.

@@ -2,6 +2,7 @@
 title: Vitrine mechamd
 date: 2026-09-28
 tags: [vitrine, thème default]
+layout: page
 ---
 
 La référence visuelle du projet. Chaque directive y montre chacune de ses

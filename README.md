@@ -22,6 +22,10 @@ mecha build mon-site/ -o dist/ # site statique
 mecha explain doc.md -p mon-site/  # variante retenue et raison pour chaque bloc
 ```
 
+Mise en page choisie dans le frontmatter : `layout: article` (défaut, avec
+sommaire, date et tags), `page` (sans sommaire ni méta) ou `notes` (compact).
+Un projet ajoute un layout dans `theme/layouts/<nom>.html`.
+
 Directives fournies : `card`, `grid`, `callout`, `timeline`, `section` (voir le
 `README.md` de chacune dans `src/mechamd/directives/`). La vitrine
 (`showcase/index.md`) les montre toutes : `mecha serve showcase`.

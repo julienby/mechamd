@@ -44,6 +44,20 @@
   .mecha-flow > :where(h3) {
     @apply mt-12;
   }
+
+  /* Layout notes : rythme resserré. */
+  .mecha-compact > :where(* + *) {
+    @apply mt-4;
+  }
+  .mecha-compact > :where([data-mecha]) {
+    @apply my-8;
+  }
+  .mecha-compact > :where(h2) {
+    @apply mt-12;
+  }
+  .mecha-compact > :where(h3) {
+    @apply mt-8;
+  }
 }
 
 @layer components {
