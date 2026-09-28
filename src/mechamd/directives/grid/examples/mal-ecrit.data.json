@@ -1,0 +1,8 @@
+{
+  "variant": "default",
+  "data": {"cols": 1, "items": [], "body": "<p>Du texte posé directement dans la grille.</p>\n"},
+  "warnings": [
+    "cols=beaucoup n'est pas un nombre entre 1 et 4 ; colonnes calculées",
+    "grille sans bloc enfant : le contenu est affiché tel quel"
+  ]
+}

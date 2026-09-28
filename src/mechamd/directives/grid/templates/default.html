@@ -1,0 +1,10 @@
+{# grid · default : les blocs enfants en colonnes (1 sur mobile). #}
+{% set columns = {1: "", 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4"} %}
+<div {{ root_attrs(block) }} class="mx-auto grid gap-6 {{ columns[cols] }}{% if cols == 1 %} max-w-2xl{% else %} max-w-5xl{% endif %}">
+  {% for item in items %}
+  {{ item.html | safe }}
+  {% endfor %}
+  {% if body %}
+  <div class="mecha-prose text-base leading-relaxed">{{ body | safe }}</div>
+  {% endif %}
+</div>

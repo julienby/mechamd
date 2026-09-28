@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "cols": 2,
+    "items": [
+      {"name": "card", "variant": "default", "id": null},
+      {"name": "card", "variant": "default", "id": null}
+    ],
+    "body": ""
+  },
+  "warnings": []
+}

@@ -2,7 +2,8 @@
 
 Chaque exemple contient un bloc de la directive. On compare ce que la directive
 a compris (données de `parse` et variante retenue), jamais le HTML. La clé
-`warnings` n'est comparée que si elle est présente dans le `.data.json`.
+`warnings` n'est comparée que si elle est présente dans le `.data.json`, et les
+clés `html` (rendu des blocs enfants) ne sont jamais comparées.
 """
 
 from __future__ import annotations
@@ -61,9 +62,10 @@ def run_example(engine: Engine, directive: Directive, example: Path) -> ExampleR
         return result
     keys = ["variant", "data"] + (["warnings"] if "warnings" in expected else [])
     for key in keys:
-        if expected.get(key) != actual[key]:
+        if _without_html(expected.get(key)) != _without_html(actual[key]):
             result.errors.append(
-                f"{key} : attendu {_dump(expected.get(key))}, obtenu {_dump(actual[key])}"
+                f"{key} : attendu {_dump(_without_html(expected.get(key)))}, "
+                f"obtenu {_dump(_without_html(actual[key]))}"
             )
     if f'data-mecha="{directive.name}"' not in actual["html"]:
         result.errors.append(f'le HTML rendu ne porte pas data-mecha="{directive.name}"')
@@ -75,6 +77,15 @@ def run_directive(engine: Engine, directive: Directive) -> list[ExampleResult]:
     if not examples:
         return [ExampleResult(directive.name, "-", ["aucun exemple dans examples/"])]
     return [run_example(engine, directive, ex) for ex in examples]
+
+
+def _without_html(value: Any) -> Any:
+    """Retire récursivement les clés `html` : c'est du rendu, pas de la compréhension."""
+    if isinstance(value, dict):
+        return {k: _without_html(v) for k, v in value.items() if k != "html"}
+    if isinstance(value, list):
+        return [_without_html(v) for v in value]
+    return value
 
 
 def _dump(value: Any) -> str:
