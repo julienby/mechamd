@@ -1,0 +1,7 @@
+{
+  "variant": "default",
+  "data": {
+    "text": "<p>Le beau vient des templates,\npas de l'auteur.</p>\n",
+    "cite": "<p>la spec de mechamd, <a href=\"SPEC.md\">v0.3</a></p>\n"
+  }
+}

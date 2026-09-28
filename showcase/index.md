@@ -294,6 +294,24 @@ Quelques chiffres clés : « valeur : libellé », une tuile par chiffre.
   Sur S1 et S3 ; S2 reste à surveiller.
 :::
 
+## quote
+
+Une citation ; la dernière ligne « — auteur » devient l'attribution.
+
+### default
+
+:::quote
+Rien dans la vie n'est à craindre, tout est à comprendre.
+— Marie Curie
+:::
+
+### pull
+
+:::quote{.pull}
+La sonde S2 dérive dès que le soleil touche la fenêtre.
+— Carnet de manip, *12 septembre*
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

@@ -1,0 +1,8 @@
+{# quote · pull : citation mise en exergue, centrée, pour un billet. #}
+<figure {{ root_attrs(block) }} class="mx-auto max-w-2xl text-center">
+  <span aria-hidden="true" class="font-serif text-5xl leading-tight text-indigo-700 dark:text-indigo-300">“</span>
+  <blockquote class="mecha-prose font-serif text-3xl leading-tight font-medium tracking-tight text-balance text-stone-900 dark:text-stone-50">{{ text | safe }}</blockquote>
+  {% if cite %}
+  <figcaption class="mecha-prose mt-4 text-xs font-semibold tracking-widest text-stone-500 uppercase dark:text-stone-400">{{ cite | safe }}</figcaption>
+  {% endif %}
+</figure>

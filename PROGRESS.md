@@ -4,8 +4,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J3 — catalogue** (lot 1 : figure, steps, specs, stats)
-- Prochaine action : proposer le lot 2 à l'humain.
+- Jalon actif : **J3 — catalogue** (lot 1 fait ; lot 2 : quote, details, todo, links, compare)
+- Prochaine action : directive `details`.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -60,6 +60,11 @@ Pistes notées pour plus tard :
 - ✅ `steps` (default, compact) — 4 exemples
 - ✅ `specs` (default, inline ; séparateur `:` ou `|`) — 4 exemples
 - ✅ `stats` (default ; colonnes = nombre de chiffres, 4 au plus) — 4 exemples
+- ✅ `quote` (default, pull ; attribution sur la dernière ligne « — auteur ») — 4 exemples
+- 🔄 `details`
+- ⬜ `todo`
+- ⬜ `links`
+- ⬜ `compare`
 
 ## Décisions
 

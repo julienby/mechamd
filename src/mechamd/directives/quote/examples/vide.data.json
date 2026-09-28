@@ -1,0 +1,8 @@
+{
+  "variant": "default",
+  "data": {
+    "text": "",
+    "cite": "<p>Personne</p>\n"
+  },
+  "warnings": ["citation vide : écrire le texte, puis « — auteur » sur la dernière ligne"]
+}

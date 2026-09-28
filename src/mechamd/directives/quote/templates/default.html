@@ -1,0 +1,7 @@
+{# quote · default : citation dans la colonne de lecture, trait d'accent à gauche. #}
+<figure {{ root_attrs(block) }} class="border-l-2 border-indigo-300 pl-6 dark:border-indigo-500/50">
+  <blockquote class="mecha-prose font-serif text-xl leading-snug text-stone-900 italic dark:text-stone-50">{{ text | safe }}</blockquote>
+  {% if cite %}
+  <figcaption class="mecha-prose mt-3 text-sm text-stone-500 dark:text-stone-400">{{ cite | safe }}</figcaption>
+  {% endif %}
+</figure>
