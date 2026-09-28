@@ -1,0 +1,7 @@
+{
+  "variant": "default",
+  "data": {
+    "summary": "Pourquoi 30 secondes entre deux mesures ?",
+    "body": "<p>La constante de temps des sondes est d'environ <strong>10 s</strong> : un pas plus court\nn'apporte rien, un pas plus long rate les ouvertures de porte.</p>\n"
+  }
+}

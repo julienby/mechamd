@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "summary": "Calcul de l'écart moyen",
+    "body": "<p>On retire la moyenne des trois sondes à chaque mesure.</p>\n"
+  },
+  "warnings": [
+    "variante « ferme » (écrite sur le bloc) inexistante ; disponibles : default, open"
+  ]
+}

@@ -1,0 +1,7 @@
+{# details · open : bloc repliable, ouvert à l'affichage. #}
+<details open {{ root_attrs(block) }} class="rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
+  <summary class="cursor-pointer p-6 font-serif text-xl leading-snug font-semibold text-stone-900 marker:text-indigo-700 dark:text-stone-50 dark:marker:text-indigo-300">{{ summary }}</summary>
+  {% if body %}
+  <div class="mecha-prose px-6 pb-6 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ body | safe }}</div>
+  {% endif %}
+</details>

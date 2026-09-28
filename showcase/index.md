@@ -312,6 +312,27 @@ La sonde S2 dérive dès que le soleil touche la fenêtre.
 — Carnet de manip, *12 septembre*
 :::
 
+## details
+
+Un bloc repliable ; le premier titre sert de résumé.
+
+### default
+
+:::details
+### Pourquoi 30 secondes entre deux mesures ?
+La constante de temps des sondes est d'environ **10 s** : un pas plus court
+n'apporte rien, un pas plus long rate les ouvertures de porte.
+:::
+
+### open
+
+:::details{.open summary="Journal brut du 12 septembre"}
+```text
+14:00:00 S1=21.4 S2=23.9 S3=21.6
+14:00:30 S1=21.4 S2=24.1 S3=21.6
+```
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte
