@@ -133,6 +133,11 @@ def compile_css(engine: Engine, out: Path | None = None, *, force: bool = False)
     return CssResult(target, compiled=True)
 
 
+def fonts_dir(engine: Engine) -> Path | None:
+    """Dossier `fonts/` du premier thème qui en a un (servi sous `_mecha/fonts/`)."""
+    return next((d / "fonts" for d in engine.theme_dirs if (d / "fonts").is_dir()), None)
+
+
 def copy_css(result: CssResult, dest: Path) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(result.path, dest)

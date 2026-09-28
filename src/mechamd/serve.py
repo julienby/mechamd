@@ -19,7 +19,7 @@ from starlette.responses import (
 )
 from starlette.routing import Route
 
-from mechamd.css import compile_css
+from mechamd.css import compile_css, fonts_dir
 from mechamd.directive import BUILTIN_DIR
 from mechamd.engine import THEMES_DIR, Engine
 
@@ -105,11 +105,19 @@ def create_app(project: str | Path = ".", *, reload: bool = True) -> Starlette:
             return Response(f"/* {result.error} */", media_type="text/css")
         return FileResponse(result.path, media_type="text/css")
 
+    async def font(request: Request) -> Response:
+        fonts = fonts_dir(site.engine)
+        file = fonts / request.path_params["name"] if fonts else None
+        if file is None or not file.is_file():
+            return Response("404", status_code=404)
+        return FileResponse(file)
+
     async def events(request: Request) -> Response:
         return StreamingResponse(_changes(site, request), media_type="text/event-stream")
 
     routes = [
         Route("/_mecha/mecha.css", css),
+        Route("/_mecha/fonts/{name}", font),
         Route("/_mecha/events", events),
         Route("/", page),
         Route("/{path:path}", page),

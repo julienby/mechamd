@@ -122,6 +122,8 @@ def test_build(site: Path, tailwind: Path, capsys: pytest.CaptureFixture[str]) -
     note = (dist / "notes" / "b204.html").read_text()
     assert 'href="../_mecha/mecha.css"' in note and 'href="../index.html"' in note
     assert (dist / "_mecha" / "mecha.css").read_text() == "/* css */\n"
+    assert (dist / "_mecha" / "fonts" / "inter-latin-wght-normal.woff2").is_file()
+    assert "fonts.googleapis.com" not in home
     assert not (dist / ".cache").exists()
     # reconstruire ne reprend pas dist/ comme contenu
     assert main(["build", str(site)]) == 0
@@ -155,6 +157,10 @@ def test_serve(site: Path, tailwind: Path) -> None:
     assert client.get("/../../etc/passwd").status_code == 404
     css = client.get("/_mecha/mecha.css")
     assert css.status_code == 200 and css.text == "/* css */\n"
+    font = client.get("/_mecha/fonts/inter-latin-wght-normal.woff2")
+    assert font.status_code == 200 and font.headers["content-type"] == "font/woff2"
+    assert client.get("/_mecha/fonts/absent.woff2").status_code == 404
+    assert client.get("/_mecha/fonts/..").status_code == 404
 
 
 def test_serve_picks_up_changes(site: Path, tailwind: Path) -> None:

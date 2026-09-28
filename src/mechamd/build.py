@@ -7,7 +7,7 @@ from collections.abc import Iterator
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from mechamd.css import compile_css, copy_css
+from mechamd.css import compile_css, copy_css, fonts_dir
 from mechamd.engine import Engine
 
 # Dossiers d'un projet qui ne sont pas du contenu.
@@ -67,4 +67,7 @@ def build(project: str | Path, out: str | Path | None = None) -> BuildReport:
         copy_css(css, target / "_mecha" / "mecha.css")
     else:
         report.css_error = css.error
+    fonts = fonts_dir(engine)
+    if fonts is not None:
+        shutil.copytree(fonts, target / "_mecha" / "fonts", dirs_exist_ok=True)
     return report

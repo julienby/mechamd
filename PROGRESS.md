@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : **J4 — publication** (🔄 en cours)
-- Prochaine action : licence et métadonnées, puis polices hébergées.
+- Prochaine action : `mecha llms` et `llms.txt`.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -52,7 +52,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 Pistes notées pour plus tard :
 - les titres des `section` n'apparaissent pas dans le sommaire (seuls les `##` du document) ;
-- polices chargées depuis Google Fonts : à héberger dans le thème avant J4 (hors-ligne).
+- ~~polices chargées depuis Google Fonts~~ : hébergées dans le thème (J4).
 
 ## J3 — Catalogue
 
@@ -68,8 +68,8 @@ Pistes notées pour plus tard :
 
 ## J4 — Publication
 
-- 🔄 Licence MIT, métadonnées du paquet
-- ⬜ Polices hébergées dans le thème
+- ✅ Licence MIT, métadonnées du paquet (0.1.0)
+- ✅ Polices hébergées dans le thème (woff2 latin Fontsource, OFL ; servies sous `_mecha/fonts/`)
 - ⬜ `mecha llms` et `llms.txt`
 - ⬜ Test en conteneur vierge
 - ⬜ Workflow de publication (tag `v*`)
@@ -83,6 +83,7 @@ Pistes notées pour plus tard :
 - ADR 0004 — direction visuelle du thème default (✅ validée, version de départ)
 - ADR 0005 — build, serveur live et compilation CSS
 - ADR 0006 — layouts de page (`base.html` + `layouts/`)
+- ADR 0007 — publication : licence MIT, polices hébergées, PyPI par workflow sur tag
 
 ## Journal
 
@@ -104,3 +105,5 @@ Pistes notées pour plus tard :
 - 2026-09-28 — Vérification visuelle du lot 2 (clair, sombre, 390 px). Corrections : double trait
   des citations (style de `blockquote` limité au texte), barre d'avancement de `todo` en `div`
   (le `<progress>` natif est cassé par le reset Tailwind), intro de `compare` dans la colonne de lecture.
+- 2026-09-28 — J4 : licence MIT, version 0.1.0. Polices hébergées dans le thème, plus aucun appel
+  à Google Fonts ; vérifié dans le navigateur (5 polices chargées depuis `_mecha/fonts/`).
