@@ -1,0 +1,16 @@
+{
+  "variant": "default",
+  "data": {
+    "title": null,
+    "anchor": null,
+    "image": null,
+    "alt": "",
+    "href": null,
+    "action": null,
+    "body": "<p>Du texte sans titre, donc sans ancre automatique.</p>\n"
+  },
+  "warnings": [
+    "section sans titre : ajouter un titre `##` ou un #id pour avoir une ancre",
+    "variante « heros » (écrite sur le bloc) inexistante ; disponibles : default, hero"
+  ]
+}

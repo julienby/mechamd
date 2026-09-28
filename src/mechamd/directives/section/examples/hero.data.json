@@ -1,0 +1,13 @@
+{
+  "variant": "hero",
+  "data": {
+    "title": "Suivi thermique de la salle B204",
+    "anchor": "accueil",
+    "image": null,
+    "alt": "",
+    "href": "rapport.md",
+    "action": "Lire le rapport",
+    "body": "<p>Deux semaines de mesures, trois capteurs, une carte thermique complète.</p>\n"
+  },
+  "warnings": []
+}

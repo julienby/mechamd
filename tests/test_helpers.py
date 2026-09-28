@@ -58,3 +58,10 @@ def test_split_items() -> None:
     ]
     assert rest == "Intro\nFin\n```\n- pas un item\n```"
     assert split_items("-") == ([Item("", "", 1)], "")
+
+
+def test_slugify() -> None:
+    from mechamd.helpers import slugify
+
+    assert slugify("Salle B204 : bilan d'été") == "salle-b204-bilan-d-été"
+    assert slugify("  ") == ""

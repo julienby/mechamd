@@ -1,0 +1,19 @@
+{# section · default : un titre ancré, puis le contenu dans le flux de lecture. #}
+<section {{ root_attrs(block) }}{% if not block.id and anchor %} id="{{ anchor }}"{% endif %} class="mx-auto max-w-5xl scroll-mt-8">
+  {% if title %}
+  <h2 class="mx-auto max-w-2xl font-serif text-3xl leading-tight font-medium tracking-tight text-balance text-stone-900 dark:text-stone-50">
+    {% if anchor %}<a href="#{{ anchor }}" class="transition duration-200 hover:text-indigo-700 dark:hover:text-indigo-300">{{ title }}</a>{% else %}{{ title }}{% endif %}
+  </h2>
+  {% endif %}
+  {% if body %}
+  <div class="mecha-flow{% if title %} mt-6{% endif %}">{{ body | safe }}</div>
+  {% endif %}
+  {% if href %}
+  <p class="mx-auto mt-6 max-w-2xl">
+    <a href="{{ href }}" class="group inline-flex items-center gap-1 text-sm font-medium text-indigo-700 dark:text-indigo-300">
+      {{ action }}
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 transition duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </p>
+  {% endif %}
+</section>

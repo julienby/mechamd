@@ -197,3 +197,12 @@ def split_items(text: str) -> tuple[list[Item], str]:
             outside.append(line)
     flush()
     return items, "\n".join(outside).strip("\n")
+
+
+# --- ancres ----------------------------------------------------------------
+
+
+def slugify(text: str) -> str:
+    """Ancre lisible : « Salle B204 : bilan » → `salle-b204-bilan` (accents gardés)."""
+    words = re.findall(r"[^\W_]+", text.lower())
+    return "-".join(words)

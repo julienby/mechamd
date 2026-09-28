@@ -1,0 +1,13 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "Matériel",
+    "anchor": "matériel",
+    "image": null,
+    "alt": "",
+    "href": null,
+    "action": null,
+    "body": "<p>Trois sondes DS18B20 et une carte BOB.</p>\n"
+  },
+  "warnings": []
+}
