@@ -6,6 +6,7 @@ les confie au module de la directive, résout la variante et rend le template.
 
 from __future__ import annotations
 
+import re
 import textwrap
 from collections.abc import Sequence
 from dataclasses import dataclass, field
@@ -85,6 +86,16 @@ def root_attrs(block: BlockView) -> Markup:
     return Markup(" ".join(parts))
 
 
+_MD_LINK_RE = re.compile(
+    r'(?P<attr>\bhref)="(?![a-zA-Z][a-zA-Z0-9+.-]*:|/|#)(?P<path>[^"#?]*?)\.md(?P<tail>[#?][^"]*)?"'
+)
+
+
+def rewrite_md_links(html: str) -> str:
+    """`href="notes/b204.md#x"` → `href="notes/b204.html#x"` (liens relatifs seulement)."""
+    return _MD_LINK_RE.sub(lambda m: f'{m["attr"]}="{m["path"]}.html{m["tail"] or ""}"', html)
+
+
 def split_frontmatter(text: str) -> tuple[dict[str, Any], str, int, list[str]]:
     """Sépare le frontmatter ; rend (meta, corps, lignes avant le corps, avertissements)."""
     handler = YAMLHandler()
@@ -121,7 +132,8 @@ class Engine:
         self.directives: dict[str, Directive]
         self.directives, self.load_errors = discover([self.project / "directives", BUILTIN_DIR])
         self.md = create_md()
-        theme_dirs = [self.project / "theme", THEMES_DIR / theme]
+        self.theme_dirs = [self.project / "theme", THEMES_DIR / theme]
+        theme_dirs = self.theme_dirs
         self.jinja = Environment(
             loader=ChoiceLoader(
                 [
@@ -137,7 +149,6 @@ class Engine:
             lstrip_blocks=True,
         )
         self.jinja.globals["root_attrs"] = root_attrs
-        self.css_href = "_mecha/mecha.css"
 
     # --- API publique -------------------------------------------------
 
@@ -147,10 +158,17 @@ class Engine:
 
     def render_page(self, path: str | Path) -> Page:
         file = self._confine(path)
-        return self.render_source(file.read_text(encoding="utf-8"), name=file.stem)
+        depth = len(file.relative_to(self.project).parts) - 1
+        return self.render_source(
+            file.read_text(encoding="utf-8"), name=file.stem, root="../" * depth
+        )
 
-    def render_source(self, text: str, *, name: str = "") -> Page:
-        """Rend un texte mechamd (frontmatter + Markdown + directives)."""
+    def render_source(self, text: str, *, name: str = "", root: str = "") -> Page:
+        """Rend un texte mechamd (frontmatter + Markdown + directives).
+
+        `root` est le chemin relatif de la page vers la racine du site (`../` par niveau).
+        Les liens relatifs vers des `.md` sont réécrits en `.html`.
+        """
         meta, body, offset, warnings = split_frontmatter(text)
         ctx = _Context(lines=body.splitlines(), offset=offset, record=True, reports=[], ids=set())
         tokens = self.md.parse(body)
@@ -167,11 +185,11 @@ class Engine:
                 "warnings": warnings,
                 "has_h1": h1 is not None,
                 "toc": _toc(tokens),
-                "css_href": self.css_href,
+                "root": root,
             },
             content=Markup(content),
         )
-        return Page(title, meta, content, html, ctx.reports, warnings)
+        return Page(title, meta, content, rewrite_md_links(html), ctx.reports, warnings)
 
     def analyze(self, text: str) -> list[BlockReport]:
         """Ce que le moteur comprend de chaque bloc (sans produire la page)."""
