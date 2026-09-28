@@ -4,8 +4,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J3 — catalogue** (lots 1 et 2 faits)
-- Prochaine action : vérification visuelle du lot 2, push, CI verte.
+- Jalon actif : **J3 — catalogue** (lots 1 et 2 faits, vérifiés à l'œil)
+- Prochaine action : choix du lot suivant de J3 (ou passage à J4) par l'humain.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -92,3 +92,6 @@ Pistes notées pour plus tard :
   à affiner.
 - 2026-09-28 — J3 lot 1 : figure, steps, specs, stats, ajoutées à la vitrine.
 - 2026-09-28 — J3 lot 2 : quote, details, todo, links, compare, ajoutées à la vitrine.
+- 2026-09-28 — Vérification visuelle du lot 2 (clair, sombre, 390 px). Corrections : double trait
+  des citations (style de `blockquote` limité au texte), barre d'avancement de `todo` en `div`
+  (le `<progress>` natif est cassé par le reset Tailwind), intro de `compare` dans la colonne de lecture.
