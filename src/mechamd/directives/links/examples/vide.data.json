@@ -1,0 +1,5 @@
+{
+  "variant": "default",
+  "data": {"intro": "", "links": []},
+  "warnings": ["aucun lien : écrire une liste « - [titre](url) : description »"]
+}

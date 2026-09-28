@@ -347,6 +347,17 @@ Avant la fin de l'acquisition :
 - [ ] Rendre le rapport
 :::
 
+## links
+
+Des liens commentés : « [titre](url) : description », ou une URL nue.
+
+:::links
+- [Fiche DS18B20](https://www.analog.com/en/products/ds18b20.html) : la sonde, précision et câblage
+- https://docs.platformio.org/en/latest/
+  Pour flasher la carte BOB.
+- [Spécification mechamd](SPEC.md) : la référence du projet
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

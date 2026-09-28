@@ -1,0 +1,25 @@
+{# links · default : liens commentés dans un bloc, domaine en regard du titre. #}
+<div {{ root_attrs(block) }} class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+  {% if intro %}
+  <div class="mecha-prose mb-4 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ intro | safe }}</div>
+  {% endif %}
+  <ul class="space-y-4">
+    {% for link in links %}
+    <li>
+      <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        {% if link.href %}
+        <a href="{{ link.href }}" class="text-base font-semibold break-words text-indigo-700 transition duration-200 hover:text-indigo-600 dark:text-indigo-300 dark:hover:text-indigo-200">{{ link.title }}</a>
+        {% else %}
+        <span class="text-base font-semibold text-stone-900 dark:text-stone-50">{{ link.title }}</span>
+        {% endif %}
+        {% if link.domain %}
+        <span class="text-sm text-stone-500 dark:text-stone-400">{{ link.domain }}</span>
+        {% endif %}
+      </div>
+      {% if link.description %}
+      <div class="mecha-prose mt-1 text-sm leading-relaxed text-stone-700 dark:text-stone-300">{{ link.description | safe }}</div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>

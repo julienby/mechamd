@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "links": [
+      {
+        "title": "Fiche DS18B20",
+        "href": "https://www.analog.com/en/products/ds18b20.html",
+        "domain": "analog.com",
+        "description": "<p>la sonde, précision et câblage</p>\n"
+      },
+      {
+        "title": "PlatformIO",
+        "href": "https://docs.platformio.org/",
+        "domain": "docs.platformio.org",
+        "description": "<p>pour flasher la carte BOB</p>\n"
+      }
+    ]
+  }
+}

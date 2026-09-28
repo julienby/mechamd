@@ -1,0 +1,30 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "links": [
+      {
+        "title": "github.com/julienby/mechamd",
+        "href": "https://github.com/julienby/mechamd",
+        "domain": "github.com",
+        "description": "<p>le dépôt</p>\n"
+      },
+      {
+        "title": "Spec",
+        "href": "SPEC.md",
+        "domain": "",
+        "description": "<p>la référence</p>\n"
+      },
+      {
+        "title": "le wiki du labo, à retrouver",
+        "href": "",
+        "domain": "",
+        "description": ""
+      }
+    ]
+  },
+  "warnings": [
+    "« le wiki du labo, à retrouver » : pas de lien (écrire « [titre](url) : description »)",
+    "variante « cartes » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}

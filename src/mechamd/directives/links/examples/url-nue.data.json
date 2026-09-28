@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<h3 id=\"à-lire\">À lire</h3>\n",
+    "links": [
+      {
+        "title": "sciencedirect.com/topics/engineering/thermal-drift",
+        "href": "https://www.sciencedirect.com/topics/engineering/thermal-drift",
+        "domain": "sciencedirect.com",
+        "description": "<p>Dérive thermique des capteurs, vue d'ensemble.</p>\n"
+      },
+      {
+        "title": "Notes du 12 septembre",
+        "href": "notes/2026-09-12.md",
+        "domain": "",
+        "description": ""
+      }
+    ]
+  }
+}
