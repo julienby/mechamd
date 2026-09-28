@@ -83,13 +83,16 @@
   .mecha-flow :where(strong) {
     @apply font-semibold text-stone-900 dark:text-stone-50;
   }
-  .mecha-flow :where(ul) {
+  .mecha-flow > :where(ul),
+  .mecha-prose :where(ul) {
     @apply list-disc pl-6 marker:text-stone-400 dark:marker:text-stone-600;
   }
-  .mecha-flow :where(ol) {
+  .mecha-flow > :where(ol),
+  .mecha-prose :where(ol) {
     @apply list-decimal pl-6 marker:text-stone-500 dark:marker:text-stone-400;
   }
-  .mecha-flow :where(li + li) {
+  .mecha-flow > :where(ul, ol) > :where(li + li),
+  .mecha-prose :where(li + li) {
     @apply mt-1;
   }
   .mecha-flow :where(:not(pre) > code) {
