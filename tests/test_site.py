@@ -1,3 +1,4 @@
+import mimetypes
 import os
 import stat
 from pathlib import Path
@@ -141,7 +142,9 @@ def test_build_reports_css_error(
     assert (tmp_path / "out" / "doc.html").is_file()
 
 
-def test_serve(site: Path, tailwind: Path) -> None:
+def test_serve(site: Path, tailwind: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    # Sans /etc/mime.types (image Docker slim), Python ne connaît pas `.woff2`.
+    monkeypatch.setattr(mimetypes, "_db", mimetypes.MimeTypes())
     client = TestClient(create_app(site))
     home = client.get("/")
     assert home.status_code == 200 and "Accueil" in home.text

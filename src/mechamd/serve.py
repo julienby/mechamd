@@ -110,7 +110,8 @@ def create_app(project: str | Path = ".", *, reload: bool = True) -> Starlette:
         file = fonts / request.path_params["name"] if fonts else None
         if file is None or not file.is_file():
             return Response("404", status_code=404)
-        return FileResponse(file)
+        # Écrit en dur : sans /etc/mime.types (image Docker slim), Python ne connaît pas `.woff2`.
+        return FileResponse(file, media_type="font/woff2" if file.suffix == ".woff2" else None)
 
     async def events(request: Request) -> Response:
         return StreamingResponse(_changes(site, request), media_type="text/event-stream")

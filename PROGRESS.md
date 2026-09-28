@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : **J4 — publication** (🔄 en cours)
-- Prochaine action : test en conteneur vierge.
+- Prochaine action : workflow de publication.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -71,7 +71,7 @@ Pistes notées pour plus tard :
 - ✅ Licence MIT, métadonnées du paquet (0.1.0)
 - ✅ Polices hébergées dans le thème (woff2 latin Fontsource, OFL ; servies sous `_mecha/fonts/`)
 - ✅ `mecha llms [-p projet]` et `llms.txt` (test de fraîcheur : régénérer si un README change)
-- ⬜ Test en conteneur vierge
+- ✅ Test en conteneur vierge (`python:3.12-slim` : wheel, `mecha build`, `mecha serve`, 3 × HTTP 200)
 - ⬜ Workflow de publication (tag `v*`)
 - ⏸️ Publication sur PyPI (humain)
 
@@ -107,3 +107,5 @@ Pistes notées pour plus tard :
   (le `<progress>` natif est cassé par le reset Tailwind), intro de `compare` dans la colonne de lecture.
 - 2026-09-28 — J4 : licence MIT, version 0.1.0. Polices hébergées dans le thème, plus aucun appel
   à Google Fonts ; vérifié dans le navigateur (5 polices chargées depuis `_mecha/fonts/`).
+- 2026-09-28 — J4 : `mecha llms`. Test en conteneur vierge : deux défauts trouvés et corrigés
+  (`--version` affichait 0.0.1 ; police servie en `application/octet-stream` faute de `/etc/mime.types`).

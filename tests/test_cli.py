@@ -1,4 +1,5 @@
 import shutil
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -73,3 +74,10 @@ def test_mecha_explain_errors(capsys: pytest.CaptureFixture[str]) -> None:
     assert main(["explain", "absent.md", "-p", str(FIXTURES / "broken")]) == 1
     out = capsys.readouterr().out
     assert "chargement" in out and "✗" in out
+
+
+def test_version_is_the_package_version(capsys: pytest.CaptureFixture[str]) -> None:
+    pyproject = tomllib.loads((FIXTURES.parent.parent / "pyproject.toml").read_text())
+    with pytest.raises(SystemExit):
+        main(["--version"])
+    assert capsys.readouterr().out == f"mechamd {pyproject['project']['version']}\n"
