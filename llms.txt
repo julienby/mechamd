@@ -1,0 +1,597 @@
+# mechamd
+
+> mechamd transforme du Markdown avec directives (`:::nom{attrs}`) en pages web soignées.
+> Le cas normal est une directive sans attribut : le moteur devine la présentation.
+
+## Syntaxe
+
+Un document est un fichier `.md` ordinaire : frontmatter optionnel (`title`, `date`,
+`tags`, `layout: article | page | notes`), Markdown, et des directives conteneurs :
+
+```markdown
+:::nom{.variante #id clé=valeur}
+contenu Markdown
+:::
+```
+
+- Pour imbriquer, le parent prend plus de `:` que ses enfants (`::::grid` contient des `:::card`).
+- `.variante` choisit une présentation ; `#id` pose une ancre ; `clé=valeur` règle la directive.
+- Variante retenue : celle écrite sur le bloc, sinon celle fixée par le parent
+  (`::::grid{card=cover}`), sinon celle devinée, sinon `default`.
+  Une variante demandée mais inexistante retombe sur la variante devinée, avec un avertissement.
+- Une directive inconnue ou mal écrite ne casse pas la page : son contenu reste lisible.
+
+Les sections suivantes sont les README des directives disponibles.
+
+## callout
+
+**Rôle** : un encadré d'information qui se détache du texte — une note, une astuce, une mise en garde.
+
+### Syntaxe
+
+```markdown
+:::callout
+Attention : recalibrer la sonde après chaque déplacement.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source |
+| --- | --- |
+| `label` | premier mot suivi de « : » s'il est connu : Astuce, Attention, Note, Info (gras toléré) |
+| `title` | premier titre du bloc, facultatif |
+| `body` | le reste, rendu en HTML (première lettre mise en majuscule après l'étiquette) |
+
+Variante devinée, un seul signal : **le premier mot**. « Astuce » → `tip`,
+« Attention » → `warning` ; sinon l'aspect d'information (`default`).
+
+### Variantes
+
+- `default` / `info` : information neutre (bleu ciel).
+- `tip` : astuce, conseil (vert).
+- `warning` : attention, précaution (ambre).
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `attention` et `astuce` (devinés), `explicite`
+(`.tip` sans mot-clé), `mal-ecrit` (variante inconnue, étiquette collée, minuscule).
+
+## card
+
+**Rôle** : un bloc de contenu autonome — un titre, un texte court, parfois une
+image et un lien d'action.
+
+### Syntaxe
+
+```markdown
+:::card
+### Capteur DS18B20
+Sonde de température étanche, précision ±0,5 °C.
+[Voir la fiche](ds18b20.md)
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `title` | premier titre du bloc (`#` à `######`) | `title=` |
+| `image`, `alt` | première image du bloc | `image=` |
+| `href`, `action` | lien seul sur la dernière ligne | `href=` (action : « Ouvrir ») |
+| `body` | le reste, rendu en HTML | — |
+
+Variante devinée, un seul signal : **une image est présente → `image`**.
+
+### Variantes
+
+- `default` : titre, texte, lien d'action en bas.
+- `image` : image en haut (ratio 16/9), puis le texte. Devinée si une image est présente.
+- `cover` : image en fond plein cadre, texte par-dessus. Seulement si demandée
+  (`:::card{.cover}` ou `::::grid{card=cover}`). Sans image, un fond d'accent la remplace.
+
+Avec un lien, toute la carte est cliquable.
+
+### Attributs
+
+- `title=` : remplace le titre lu dans le contenu.
+- `image=` : chemin ou URL de l'image.
+- `href=` : cible du lien d'action.
+
+### Exemples
+
+Voir `examples/` : `simple` (cas nu), `image` (devinée), `cover` (explicite,
+avec `#id` et `href=`), `mal-ecrit` (variante inconnue, image au milieu du
+texte, pas de titre), `vide`.
+
+## compare
+
+**Rôle** : des options côte à côte (matériel, méthodes, avant/après), une colonne par titre.
+
+### Syntaxe
+
+```markdown
+:::compare
+### DS18B20
+Étanche, bus 1-Wire, ±0,5 °C.
+
+### SHT31
+Température et humidité, bus I²C.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `columns` | un titre ouvre une colonne ; le niveau du premier titre fait foi, les titres plus petits restent dans la colonne | — |
+| `intro` | le texte avant le premier titre | — |
+
+Les `#` dans un bloc de code ne sont pas des titres. Colonnes : autant que
+d'options, 4 au plus par ligne, une seule sur mobile.
+
+Avertissements : aucune colonne, ou une seule.
+
+### Variantes
+
+- `default` : une carte par option, en grille.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `trois` (intro, sous-titre dans une colonne),
+`mal-ecrit` (une seule colonne, code avec `#`, variante inconnue), `vide`.
+
+## details
+
+**Rôle** : un bloc repliable (précision, calcul, journal brut, question de FAQ).
+
+### Syntaxe
+
+```markdown
+:::details
+### Pourquoi 30 secondes entre deux mesures ?
+La constante de temps des sondes est d'environ 10 s.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `summary` | le premier titre, sinon la première ligne, sinon « Détails » | `summary=` |
+| `body` | le reste du contenu, rendu en HTML | — |
+
+Pas de variante devinée. Pour une FAQ, écrire un bloc par question.
+
+Avertissement : rien à replier (contenu vide).
+
+### Variantes
+
+- `default` : fermé ; seul le résumé est visible.
+- `open` : ouvert à l'affichage, repliable ensuite.
+
+### Attributs
+
+- `summary=` : texte du résumé cliquable.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `open` (explicite, `summary=`), `mal-ecrit`
+(pas de titre, variante inconnue), `vide`.
+
+## figure
+
+**Rôle** : montrer une ou plusieurs images avec leur légende (photo de manip,
+schéma, courbe, galerie de billet).
+
+### Syntaxe
+
+```markdown
+:::figure
+![Le banc de mesure vu de dessus](photos/banc.jpg)
+Le banc de mesure, câblé pour la série B.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `images` (`src`, `alt`) | toutes les images du bloc, dans l'ordre, même au milieu d'une phrase | — |
+| `caption` | le reste du texte, rendu en HTML | — |
+
+Variante devinée, un seul signal : **deux images ou plus → `gallery`**.
+
+Avertissements : aucune image ; image sans texte alternatif.
+
+### Variantes
+
+- `default` : images dans la colonne de lecture, légende discrète dessous.
+- `wide` : images en largeur de bloc visuel (`max-w-5xl`), pour un schéma ou une
+  courbe détaillée. Seulement si demandée (`:::figure{.wide}`).
+- `gallery` : images en grille de même ratio (16/9), trois colonnes au plus.
+  Devinée à partir de deux images.
+
+### Attributs
+
+Aucun. L'`id` (`#courbe`) permet de renvoyer à la figure : `[voir la figure](#courbe)`.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `galerie` (devinée), `large` (explicite, avec
+`#id`), `mal-ecrit` (image au milieu d'une phrase, sans texte alternatif), `vide`.
+
+## grid
+
+**Rôle** : disposer des blocs (des cartes le plus souvent) en colonnes.
+
+### Syntaxe
+
+Le conteneur prend plus de `:` que ses enfants.
+
+```markdown
+::::grid
+:::card
+### DS18B20
+Sonde étanche, ±0,5 °C.
+:::
+
+:::card
+### SHT31
+Température et humidité.
+:::
+::::
+```
+
+### Ce qui est deviné
+
+- Nombre de colonnes = nombre de blocs enfants, 3 au plus (surcharge : `cols=`, de 1 à 4).
+- Sur mobile, une seule colonne ; deux sur tablette.
+- `card=cover` (ou tout `<directive>=<variante>`) fixe la variante des enfants,
+  sauf ceux qui précisent la leur.
+
+### Variantes
+
+- `default` : colonnes de même largeur, gouttière `gap-6`, largeur `max-w-5xl`.
+
+### Attributs
+
+- `cols=` : nombre de colonnes sur grand écran (1 à 4).
+- `<directive>=<variante>` : variante des enfants (rang 2 de la résolution).
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu, 2 colonnes devinées), `cover` (`cols=3 card=cover`,
+un enfant garde sa variante), `mal-ecrit` (`cols` illisible, pas d'enfant).
+
+## links
+
+**Rôle** : une liste de liens commentés (bibliographie, ressources, « à lire »).
+
+### Syntaxe
+
+```markdown
+:::links
+- [Fiche DS18B20](https://www.analog.com/…) : la sonde, précision et câblage
+- https://docs.platformio.org/
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `links[].href` | le lien en tête d'élément : `[titre](url)`, `<url>` ou URL nue | — |
+| `links[].title` | le texte du lien, sinon l'URL sans `https://` ni `www.` | — |
+| `links[].domain` | l'hôte de l'URL, sans `www.` ; vide pour un lien relatif | — |
+| `links[].description` | le texte après `:`, `\|`, `—` ou `--`, et les lignes indentées, rendus en HTML | — |
+| `intro` | le texte hors de la liste (un titre, par exemple), rendu en HTML | — |
+
+Pas de variante devinée.
+
+Avertissements : aucun lien ; élément sans lien (gardé, affiché sans lien).
+
+### Variantes
+
+- `default` : les liens dans un bloc, titre en couleur d'accent, domaine en regard.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `url-nue` (URL nue, lien relatif, titre en
+intro), `mal-ecrit` (`<url>`, séparateurs `--` et `|`, élément sans lien,
+variante inconnue), `vide`.
+
+## quote
+
+**Rôle** : une citation et son attribution (auteur, source).
+
+### Syntaxe
+
+```markdown
+:::quote
+Rien dans la vie n'est à craindre, tout est à comprendre.
+— Marie Curie
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `text` | le contenu, rendu en HTML ; les `>` en début de ligne sont retirés | — |
+| `cite` | la dernière ligne si elle commence par `—`, `–` ou `--`, rendue en HTML | `author=` |
+
+Pas de variante devinée.
+
+Avertissement : citation vide.
+
+### Variantes
+
+- `default` : citation dans la colonne de lecture, trait d'accent à gauche.
+- `pull` : citation mise en exergue, grande et centrée, pour rythmer un billet.
+
+### Attributs
+
+- `author=` : remplace l'attribution lue dans le contenu (Markdown accepté).
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `pull` (explicite, `author=`), `mal-ecrit`
+(lignes en `>`, attribution en `--` avec un lien), `vide`.
+
+## section
+
+**Rôle** : une grande partie de page, avec une ancre pour y renvoyer.
+
+### Syntaxe
+
+```markdown
+:::section
+## Matériel
+Trois sondes DS18B20 et une carte BOB.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `title` | premier titre du bloc | `title=` |
+| `anchor` | `#id` du bloc, sinon le titre en ancre (`matériel`) | `#id` |
+| `href`, `action` | lien seul sur la dernière ligne | `href=` (action : « Ouvrir ») |
+| `image`, `alt` | — (les images du contenu restent dans le texte) | `image=`, `alt=` |
+| `body` | le reste, rendu en HTML (directives comprises) | — |
+
+Pas de variante devinée. Une section sans titre ni `#id` n'a pas d'ancre (avertissement).
+
+### Variantes
+
+- `default` : titre ancré, puis le contenu ; accepte des blocs larges (grilles).
+- `hero` : grande ouverture de page, titre affiche centré, bouton d'action ;
+  avec `image=`, l'image passe en fond sous un voile.
+
+### Attributs
+
+- `title=`, `href=` : remplacent le titre et le lien lus dans le contenu.
+- `image=`, `alt=` : image de fond (variante `hero`).
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `hero` (explicite, avec `#id` et action),
+`mal-ecrit` (variante inconnue, pas de titre).
+
+## specs
+
+**Rôle** : une fiche de caractéristiques « clé : valeur » (capteur, matériel,
+paramètres d'une manip).
+
+### Syntaxe
+
+```markdown
+:::specs
+### Sonde DS18B20
+- Plage : -55 à 125 °C
+- Précision : ±0,5 °C
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `title` | premier titre du bloc (`#` à `######`) | `title=` |
+| `rows[].key`, `rows[].value` | chaque ligne « clé : valeur » ou « clé \| valeur », avec ou sans puce | — |
+| `note` | les autres lignes, rendues en HTML | — |
+
+Le séparateur est le premier `:` ou `|` de la ligne (espaces facultatifs) ; `://`
+(une URL) n'en est pas un. La clé perd son gras (`**Poids**`). La valeur reste du
+texte simple. Pas de variante devinée.
+
+Avertissement : aucune caractéristique.
+
+### Variantes
+
+- `default` : fiche encadrée, clé à gauche et valeur à droite (empilées sur mobile).
+- `inline` : caractéristiques en pastilles, pour quelques paramètres en tête de note.
+
+### Attributs
+
+- `title=` : remplace le titre lu dans le contenu.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `inline` (explicite, séparateur `|`),
+`mal-ecrit` (séparateurs mélangés, clé en gras, URL, `title=`), `vide`.
+
+## stats
+
+**Rôle** : quelques chiffres clés mis en avant (bilan de manip, résumé de billet).
+
+### Syntaxe
+
+```markdown
+:::stats
+- 48 h : d'acquisition
+- 3 : sondes DS18B20
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `stats[].value`, `stats[].label` | chaque élément de liste « valeur : libellé » ou « valeur \| libellé » | — |
+| `stats[].detail` | les lignes indentées sous l'élément, rendues en HTML | — |
+| `intro` | le texte hors liste, rendu en HTML | — |
+
+Le séparateur est le premier `:` ou `|`. La valeur perd son gras (`**12**`).
+Un élément sans séparateur devient une valeur sans libellé. Pas de variante devinée.
+
+Avertissements : aucun chiffre ; élément sans séparateur.
+
+### Variantes
+
+- `default` : une tuile par chiffre ; autant de colonnes que de chiffres, 4 au plus
+  (une seule sur mobile).
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `texte` (intro, détail, séparateur `|`),
+`mal-ecrit` (puces mélangées, gras, élément sans séparateur, variante inconnue),
+`vide`.
+
+## steps
+
+**Rôle** : une procédure en étapes numérotées (installer, flasher, monter une manip).
+
+### Syntaxe
+
+```markdown
+:::steps
+1. Brancher la carte en USB
+2. Lancer le flash
+3. Vérifier la LED verte
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `steps[].title` | chaque élément de liste (`1.`, `1)`, `-`, `*`), rendu en HTML | — |
+| `steps[].body` | les lignes indentées sous l'élément (texte, code, image) | — |
+| `intro` | le texte hors de la liste | — |
+
+La numérotation est toujours recalculée : `1.`, `-` ou `1)` donnent le même rendu.
+Pas de variante devinée.
+
+Avertissement : aucune étape.
+
+### Variantes
+
+- `default` : une pastille numérotée par étape, le détail dessous.
+- `compact` : numéros discrets et étapes resserrées, pour une check-list de manip.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu, avec intro et code), `compact` (explicite),
+`mal-ecrit` (marqueurs mélangés, variante inconnue), `vide`.
+
+## timeline
+
+**Rôle** : une chronologie, écrite comme une liste de notes datées.
+
+### Syntaxe
+
+```markdown
+:::timeline
+- 2024 : Création du labo
+- mars 2025 : Premier prototype BOB
+- 12/09/2026 : Déploiement en salle B204
+  Trois capteurs, deux semaines de mesure.
+:::
+```
+
+### Ce qui est deviné
+
+- Chaque élément de liste est `date : titre` ; le séparateur est `:` ou `|`.
+- Dates reconnues (affichées comme écrites) : « 2024 », « mars 2025 »,
+  « 1er août 2026 », « 12/09/2026 », « 09/2026 », « 2026-09-12 ».
+- Une ligne indentée sous un élément devient sa description.
+- Un élément sans date reconnue reste affiché, avec un avertissement.
+- Le texte hors de la liste s'affiche en introduction.
+
+Pas de variante devinée.
+
+### Variantes
+
+- `default` : chronologie verticale, un repère par date, titres en avant.
+- `compact` : une ligne par date, pour les listes longues.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `compact` (explicite, séparateur `|`),
+`mal-ecrit` (texte hors liste, élément sans date, titre manquant).
+
+## todo
+
+**Rôle** : une liste de tâches, cochées ou non, avec l'avancement (fait / total).
+
+### Syntaxe
+
+```markdown
+:::todo
+- [x] Commander les sondes
+- [ ] Poser en salle B204
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `items` | les éléments de liste ; `[x]` ou `[X]` = fait, `[ ]` ou `[]` = à faire | — |
+| `items[].detail` | les lignes indentées sous la tâche, rendues en HTML | — |
+| `intro` | le texte hors de la liste, rendu en HTML | — |
+| `done`, `total` | comptés sur les cases | — |
+
+Pas de variante devinée.
+
+Avertissements : aucune tâche ; élément sans case (compté à faire).
+
+### Variantes
+
+- `default` : tâches dans un bloc, barre d'avancement en tête.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `intro` (texte, détail, lien), `mal-ecrit`
+(puces mêlées, `[X]`, `[]`, élément sans case, variante inconnue), `vide`.

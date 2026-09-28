@@ -75,6 +75,13 @@ def cmd_build(args: argparse.Namespace) -> int:
     return 1 if report.css_error else 0
 
 
+def cmd_llms(args: argparse.Namespace) -> int:
+    from mechamd.llms import generate
+
+    print(generate(Engine(project=args.project)), end="")
+    return 0
+
+
 def cmd_serve(args: argparse.Namespace) -> int:  # pragma: no cover - lance un serveur
     from mechamd.serve import serve
 
@@ -104,6 +111,10 @@ def build_parser() -> argparse.ArgumentParser:
     build.add_argument("project", nargs="?", default=".", help="dossier du projet (défaut : .)")
     build.add_argument("-o", "--output", help="dossier de sortie (défaut : <projet>/dist)")
     build.set_defaults(func=cmd_build)
+
+    llms = sub.add_parser("llms", help="syntaxe et README des directives pour un LLM (llms.txt)")
+    llms.add_argument("-p", "--project", default=".", help="dossier du projet (défaut : .)")
+    llms.set_defaults(func=cmd_llms)
 
     serve = sub.add_parser("serve", help="rendu live avec rechargement automatique")
     serve.add_argument("project", nargs="?", default=".", help="dossier du projet (défaut : .)")
