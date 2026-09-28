@@ -1,0 +1,9 @@
+{
+  "variant": "default",
+  "data": {
+    "title": null,
+    "rows": [],
+    "note": "<p>Caractéristiques à relever sur la fiche.</p>\n"
+  },
+  "warnings": ["aucune caractéristique : écrire une ligne « clé : valeur » par caractéristique"]
+}

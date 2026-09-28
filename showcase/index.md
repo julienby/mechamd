@@ -259,6 +259,29 @@ Pour flasher la carte BOB :
 - Refermer et relancer l'acquisition
 :::
 
+## specs
+
+Une fiche « clé : valeur », avec ou sans puces.
+
+### default
+
+:::specs
+### Sonde DS18B20
+- Plage : -55 à 125 °C
+- Précision : ±0,5 °C
+- Bus : 1-Wire, adresse unique par sonde
+- Câble : 1 m, gaine silicone
+:::
+
+### inline
+
+:::specs{.inline}
+Durée | 48 h
+Pas | 30 s
+Sondes | 3
+Salle | B204
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

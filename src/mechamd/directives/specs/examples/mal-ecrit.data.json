@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "Carte BOB",
+    "rows": [
+      {"key": "Capteur", "value": "DS18B20"},
+      {"key": "précision", "value": "±0,5 °C"},
+      {"key": "Alimentation", "value": "3,3 V"}
+    ],
+    "note": "<p>fiche sur https://example.org/bob.pdf</p>\n"
+  }
+}

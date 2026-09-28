@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "Sonde DS18B20",
+    "rows": [
+      {"key": "Plage", "value": "-55 à 125 °C"},
+      {"key": "Précision", "value": "±0,5 °C"},
+      {"key": "Bus", "value": "1-Wire"}
+    ],
+    "note": ""
+  }
+}

@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : **J3 — catalogue** (lot 1 : figure, steps, specs, stats)
-- Prochaine action : directive `specs`.
+- Prochaine action : directive `stats`.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -58,8 +58,8 @@ Pistes notées pour plus tard :
 
 - ✅ `figure` (default, wide, gallery ; galerie devinée à 2 images) — 5 exemples
 - ✅ `steps` (default, compact) — 4 exemples
-- 🔄 `specs`
-- ⬜ `stats`
+- ✅ `specs` (default, inline ; séparateur `:` ou `|`) — 4 exemples
+- 🔄 `stats`
 
 ## Décisions
 

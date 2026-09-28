@@ -1,0 +1,19 @@
+{# specs · default : fiche encadrée, une ligne par caractéristique. #}
+<section {{ root_attrs(block) }} class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+  {% if title %}
+  <h3 class="mb-4 font-serif text-xl leading-snug font-semibold text-balance text-stone-900 dark:text-stone-50">{{ title }}</h3>
+  {% endif %}
+  {% if rows %}
+  <dl class="space-y-3">
+    {% for row in rows %}
+    <div class="sm:grid sm:grid-cols-3 sm:gap-6">
+      <dt class="text-sm font-medium text-stone-500 dark:text-stone-400">{{ row.key }}</dt>
+      <dd class="mt-1 text-base text-stone-900 sm:col-span-2 sm:mt-0 dark:text-stone-50">{{ row.value }}</dd>
+    </div>
+    {% endfor %}
+  </dl>
+  {% endif %}
+  {% if note %}
+  <div class="mecha-prose mt-4 text-sm leading-relaxed text-stone-500 dark:text-stone-400">{{ note | safe }}</div>
+  {% endif %}
+</section>

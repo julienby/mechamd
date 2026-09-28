@@ -1,0 +1,12 @@
+{
+  "variant": "inline",
+  "data": {
+    "title": null,
+    "rows": [
+      {"key": "Durée", "value": "48 h"},
+      {"key": "Pas", "value": "30 s"},
+      {"key": "Sondes", "value": "3"}
+    ],
+    "note": ""
+  }
+}

@@ -1,0 +1,17 @@
+{# specs · inline : caractéristiques en pastilles, sur une ou deux lignes. #}
+<div {{ root_attrs(block) }}>
+  {% if title %}
+  <p class="mb-3 text-xs font-semibold tracking-widest text-stone-500 uppercase dark:text-stone-400">{{ title }}</p>
+  {% endif %}
+  <dl class="flex flex-wrap gap-2">
+    {% for row in rows %}
+    <div class="flex items-baseline gap-2 rounded-full bg-stone-100 px-3 py-1 text-sm dark:bg-stone-800/60">
+      <dt class="text-stone-500 dark:text-stone-400">{{ row.key }}</dt>
+      <dd class="font-medium text-stone-900 dark:text-stone-50">{{ row.value }}</dd>
+    </div>
+    {% endfor %}
+  </dl>
+  {% if note %}
+  <div class="mecha-prose mt-3 text-sm leading-relaxed text-stone-500 dark:text-stone-400">{{ note | safe }}</div>
+  {% endif %}
+</div>
