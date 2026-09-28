@@ -2,7 +2,7 @@
 
 **Contexte.** La spec liste les champs de `Block` sans fixer leurs types.
 
-**Choix (à valider par l'humain, contrat).**
+**Choix (✅ validé par l'humain le 2026-09-28).**
 
 - `children` est une liste de `RenderedBlock(name, variant, id, html)` : les
   enfants sont rendus avant le parent, avec la variante fixée par le parent.

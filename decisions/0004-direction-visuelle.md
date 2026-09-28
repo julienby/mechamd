@@ -1,6 +1,6 @@
 # 0004 — Direction visuelle du thème default (proposition J1)
 
-**Statut** : ⏸️ en attente de validation humaine (escalade prévue par la spec).
+**Statut** : ✅ validée par l'humain le 2026-09-28 (« ok pour un début ») ; à affiner à l'usage.
 
 **Contexte.** La spec demande de figer typographie, palette, espacements,
 formes, largeurs et mode sombre avant toute directive (`tokens.md`).

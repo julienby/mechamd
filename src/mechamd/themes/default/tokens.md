@@ -1,6 +1,6 @@
 # Socle visuel — thème `default`
 
-> Statut : **proposition J1, en attente de validation humaine.**
+> Statut : **validé (J1, 2026-09-28), version de départ, à affiner à l'usage.**
 
 Ce fichier fixe les seules valeurs de style qu'un template peut utiliser.
 Une classe Tailwind absente d'ici n'a pas sa place dans un template.
