@@ -14,6 +14,18 @@ Sonde de température étanche, précision ±0,5 °C.
 Voir [`SPEC.md`](SPEC.md) pour la spécification, [`AGENTS.md`](AGENTS.md) pour
 les règles de contribution et [`PROGRESS.md`](PROGRESS.md) pour l'avancement.
 
+## Utilisation
+
+```sh
+mecha serve mon-site/          # rendu live, rechargement automatique
+mecha build mon-site/ -o dist/ # site statique
+mecha explain mon-site/doc.md  # variante retenue et raison pour chaque bloc
+```
+
+Directives fournies : `card`, `grid`, `callout`, `timeline`, `section` (voir le
+`README.md` de chacune dans `src/mechamd/directives/`). La vitrine
+(`showcase/index.md`) les montre toutes : `mecha serve showcase`.
+
 ## Développement
 
 ```sh

@@ -4,10 +4,9 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J2 Build + live**
-- Prochaine action : helpers `parse_date` / `split_items`, puis directives `callout`, `timeline`,
-  `section`, `grid`, puis compilation CSS, `mecha build`, `mecha serve`.
-- En attente humaine : aucune. (CI : laissée dans `ci/`, jugée acceptable par l'humain pour l'instant.)
+- Jalon actif : **J2 terminé** — prochain : J3 (catalogue, directives ajoutées par agents)
+- Prochaine action : attendre les retours de l'humain sur la vitrine complète, puis ouvrir J3.
+- En attente humaine : aucune bloquante. (CI : laissée dans `ci/`, jugée acceptable par l'humain.)
 
 ## J0 — Fondations
 
@@ -36,15 +35,22 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## J2 — Build + live
 
-- ⬜ Helpers `parse_date` (dates approximatives), `split_items`
-- ⬜ Directive `callout` (info, tip, warning ; devinée sur le premier mot)
-- ⬜ Directive `timeline` (default, compact)
-- ⬜ Directive `section` (default, hero)
-- ⬜ Directive `grid` (colonnes = nombre d'enfants, 3 au plus ; `cols=`)
-- ⬜ Compilation CSS (binaire Tailwind v4 autonome, recompilé seulement si un template change)
-- ⬜ `mecha build [dossier] -o dist/`
-- ⬜ `mecha serve [dossier]` (Starlette + uvicorn, cache sur mtime, rechargement auto)
-- ⬜ Vitrine complète, construite et servie en live
+- ✅ Helpers `parse_date` (dates approximatives), `split_items`, `slugify`
+- ✅ Directive `callout` (default/info, tip, warning ; devinée sur le premier mot) — 5 exemples
+- ✅ Directive `timeline` (default, compact) — 3 exemples
+- ✅ Directive `section` (default, hero) — 3 exemples
+- ✅ Directive `grid` (colonnes = nombre d'enfants, 3 au plus ; `cols=` de 1 à 4) — 3 exemples
+- ✅ Compilation CSS (binaire Tailwind v4.3.3 autonome, cache par signature des templates) — ADR 0005
+- ✅ `mecha build [dossier] -o dist/` (liens `.md` → `.html`, chemins relatifs, ressources copiées)
+- ✅ `mecha serve [dossier]` (Starlette + uvicorn, cache sur mtime, moteur rechargé si une
+  directive change, rechargement du navigateur par SSE, `--no-reload` pour la production)
+- ✅ Vitrine complète : construite par `mecha build`, servie et rechargée en live (vérifié à la main),
+  aperçu mis à jour dans l'artifact privé
+- ✅ Toutes les directives vertes : 19/19 exemples ; 48 tests pytest (couverture 98 %) sur 3.11–3.13
+
+Pistes notées pour plus tard :
+- les titres des `section` n'apparaissent pas dans le sommaire (seuls les `##` du document) ;
+- polices chargées depuis Google Fonts : à héberger dans le thème avant J4 (hors-ligne).
 
 ## Décisions
 
@@ -52,6 +58,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 - ADR 0002 — directive inconnue ou en erreur : encadré discret avec le contenu rendu
 - ADR 0003 — précisions du contrat `Block` (✅ validée)
 - ADR 0004 — direction visuelle du thème default (✅ validée, version de départ)
+- ADR 0005 — build, serveur live et compilation CSS
 
 ## Journal
 
@@ -63,3 +70,5 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
   images inlinés. Vérifié à l'œil en clair/sombre, 1280 px et 390 px. Arrêt pour validation.
 - 2026-09-28 — Validation humaine : contrat `Block` et direction visuelle. J1 terminé avec
   `mecha explain`. Passage à J2.
+- 2026-09-28 — J2 : callout, timeline, section, grid ; CSS Tailwind, `mecha build`, `mecha serve`.
+  Correction : les styles de listes du texte s'appliquaient aux listes des templates (timeline).

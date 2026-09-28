@@ -95,7 +95,8 @@ bordure. Rien ne bouge sauf un léger `hover:-translate-y-0.5` des cartes cliqua
   centrée — texte, listes, titres, blocs simples (une carte seule, un encadré).
   Pas `max-w-prose` : exprimé en `ch`, il varierait avec la taille de police de
   chaque élément et décalerait titres, tableaux et code.
-- **Blocs visuels larges** : `max-w-5xl` — grilles, sections, chronologies.
+- **Blocs visuels larges** : `max-w-5xl` — grilles, sections. Les chronologies
+  restent dans la colonne de lecture.
 - **Page** : gouttières `px-4` (mobile) à `px-6` (`sm:`).
 
 ## Mode sombre
