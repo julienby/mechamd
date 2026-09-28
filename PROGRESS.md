@@ -4,7 +4,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J0 Fondations** (CI à confirmer sur GitHub)
+- Jalon actif : **J0 Fondations** (terminé côté code ; CI à activer par l'humain)
 - Prochaine action : J1, direction visuelle.
 
 ## J0 — Fondations
@@ -16,7 +16,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 - ✅ Noyau minimal : frontmatter, Markdown, repérage des directives, résolution des variantes, rendu tolérant
 - ✅ Commande `mecha test [directive] [-p projet]`
 - ✅ Directive vide de test (`tests/fixtures/project/directives/empty`) qui passe ses exemples
-- 🔄 CI GitHub Actions (Python 3.11 à 3.13 : ruff, mypy, pytest, `mecha test`) — premier run à vérifier
+- ⛔ CI GitHub Actions (Python 3.11 à 3.13 : ruff, mypy, pytest, `mecha test`) — workflow écrit dans `ci/github-ci.yml`, mais l'agent ne peut pas pousser dans `.github/workflows/` (jeton sans portée `workflow`). ⏸️ Un humain doit le déplacer (voir `ci/README.md`). Vérifications locales vertes sur Python 3.11.
 
 ## J1 — Socle + card
 
