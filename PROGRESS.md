@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : **J4 — publication** (🔄 en cours)
-- Prochaine action : workflow de publication.
+- Prochaine action : README, push, CI verte.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -72,7 +72,7 @@ Pistes notées pour plus tard :
 - ✅ Polices hébergées dans le thème (woff2 latin Fontsource, OFL ; servies sous `_mecha/fonts/`)
 - ✅ `mecha llms [-p projet]` et `llms.txt` (test de fraîcheur : régénérer si un README change)
 - ✅ Test en conteneur vierge (`python:3.12-slim` : wheel, `mecha build`, `mecha serve`, 3 × HTTP 200)
-- ⬜ Workflow de publication (tag `v*`)
+- ✅ Workflow de publication `publish.yml` (tag `v*` = version, build, garde-fou, Trusted Publishing)
 - ⏸️ Publication sur PyPI (humain)
 
 ## Décisions
