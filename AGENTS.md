@@ -82,3 +82,4 @@ directives/<nom>/
 ## Lessons
 
 - 2026-09-28 — Un style global du texte cible seulement le contenu écrit par l'auteur, jamais le HTML des composants. (erreur observée : deux fois, les styles de listes puis de citations du texte ont déformé des templates)
+- 2026-09-28 — Une valeur n'a qu'une source de vérité ; les autres endroits la lisent au lieu de la recopier. (erreur observée : version du paquet écrite en deux endroits, une seule mise à jour)
