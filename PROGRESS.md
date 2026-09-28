@@ -6,7 +6,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 - Jalon actif : **J2 terminé** — prochain : J3 (catalogue, directives ajoutées par agents)
 - Prochaine action : attendre les retours de l'humain sur la vitrine complète, puis ouvrir J3.
-- En attente humaine : aucune bloquante. (CI : laissée dans `ci/`, jugée acceptable par l'humain.)
+- En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
 
@@ -17,7 +17,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 - ✅ Noyau minimal : frontmatter, Markdown, repérage des directives, résolution des variantes, rendu tolérant
 - ✅ Commande `mecha test [directive] [-p projet]`
 - ✅ Directive vide de test (`tests/fixtures/project/directives/empty`) qui passe ses exemples
-- ⛔ CI GitHub Actions (Python 3.11 à 3.13 : ruff, mypy, pytest, `mecha test`) — workflow écrit dans `ci/github-ci.yml`, mais l'agent ne peut pas pousser dans `.github/workflows/` (jeton sans portée `workflow`). Pour l'activer : `git mv ci/github-ci.yml .github/workflows/ci.yml` (voir `ci/README.md`). En attendant, les vérifications sont lancées en local avant chaque push (3.11, 3.12, 3.13).
+- ✅ CI GitHub Actions (Python 3.11 à 3.13 : ruff, mypy, pytest, `mecha test`) — `.github/workflows/ci.yml`
 
 ## J1 — Socle + card
 
@@ -65,6 +65,7 @@ Pistes notées pour plus tard :
 - 2026-09-28 — Création de `AGENTS.md` et `PROGRESS.md` à partir de la spec.
 - 2026-09-28 — J0 : noyau minimal, `mecha test`, 29 tests pytest (couverture 99 %), CI écrite.
 - 2026-09-28 — CI : push du workflow refusé (jeton sans portée `workflow`) ; fichier livré dans `ci/`.
+- 2026-09-28 — CI activée : workflow déplacé dans `.github/workflows/`.
 - 2026-09-28 — J1 : tokens, layout, card, vitrine. Aperçu généré ainsi : Tailwind v4.3 (binaire
   autonome) compile `mecha.css`, `Engine(project="showcase").render_page("index.md")`, CSS et
   images inlinés. Vérifié à l'œil en clair/sombre, 1280 px et 390 px. Arrêt pour validation.
