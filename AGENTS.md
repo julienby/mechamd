@@ -78,3 +78,7 @@ directives/<nom>/
 - `x.data.json` : `{"variant": ..., "data": {...}}` et, si utile,
   `"warnings": [...]`. Ces tests portent sur ce que la directive a compris, pas
   sur le HTML.
+
+## Lessons
+
+- 2026-09-28 — Un style global du texte cible seulement le contenu écrit par l'auteur, jamais le HTML des composants. (erreur observée : deux fois, les styles de listes puis de citations du texte ont déformé des templates)
