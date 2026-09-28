@@ -1,0 +1,2 @@
+def parse(block):
+    return {}
