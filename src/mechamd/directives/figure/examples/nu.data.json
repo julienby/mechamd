@@ -1,0 +1,7 @@
+{
+  "variant": "default",
+  "data": {
+    "images": [{"src": "photos/banc.jpg", "alt": "Le banc de mesure vu de dessus"}],
+    "caption": "<p>Le banc de mesure, câblé pour la série B.</p>\n"
+  }
+}

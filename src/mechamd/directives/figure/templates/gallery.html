@@ -1,0 +1,12 @@
+{# figure · gallery : images en grille (3 colonnes au plus), légende commune. #}
+{% set columns = {0: "", 1: "", 2: "sm:grid-cols-2"} %}
+<figure {{ root_attrs(block) }} class="mx-auto{% if images | length > 1 %} max-w-5xl{% endif %}">
+  <div class="grid gap-4 {{ columns.get(images | length, "sm:grid-cols-2 lg:grid-cols-3") }}">
+    {% for image in images %}
+    <img src="{{ image.src }}" alt="{{ image.alt }}" loading="lazy" class="aspect-video w-full rounded-lg bg-stone-100 object-cover dark:bg-stone-800">
+    {% endfor %}
+  </div>
+  {% if caption %}
+  <figcaption class="mecha-prose mx-auto mt-3 max-w-2xl text-sm text-stone-500 dark:text-stone-400">{{ caption | safe }}</figcaption>
+  {% endif %}
+</figure>

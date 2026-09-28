@@ -1,0 +1,7 @@
+{
+  "variant": "wide",
+  "data": {
+    "images": [{"src": "courbe.svg", "alt": "Température sur 48 h"}],
+    "caption": "<p><strong>Figure 2.</strong> Température relevée sur 48 h.</p>\n"
+  }
+}

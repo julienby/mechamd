@@ -205,6 +205,33 @@ affichées comme écrites.
 - 2026-09-26 | Fin de l'acquisition
 :::
 
+## figure
+
+Une ou plusieurs images et leur légende. Deux images ou plus : une galerie.
+
+### default
+
+:::figure
+![Relevé topographique de la salle](photos/salle.svg)
+La salle B204, relevé du 12 septembre.
+:::
+
+### wide
+
+:::figure{.wide #courbe}
+![Courbe de température sur 48 h](photos/courbe.svg)
+**Figure 2.** Température relevée sur 48 h, sonde du milieu.
+:::
+
+### gallery
+
+:::figure
+![Prototype BOB](photos/prototype.svg)
+![Salle B204](photos/salle.svg)
+![Courbe de température](photos/courbe.svg)
+Le prototype, la salle, la mesure.
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

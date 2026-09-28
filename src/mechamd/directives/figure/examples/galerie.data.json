@@ -1,0 +1,11 @@
+{
+  "variant": "gallery",
+  "data": {
+    "images": [
+      {"src": "photos/avant.jpg", "alt": "Sonde avant pose"},
+      {"src": "photos/pose.jpg", "alt": "Sonde posée"},
+      {"src": "photos/boitier.jpg", "alt": "Boîtier fermé"}
+    ],
+    "caption": "<p>Pose de la sonde en trois temps.</p>\n"
+  }
+}

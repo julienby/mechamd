@@ -1,0 +1,8 @@
+{
+  "variant": "default",
+  "data": {
+    "images": [{"src": "courbe.png", "alt": ""}],
+    "caption": "<p>voilà la courbe après une nuit</p>\n"
+  },
+  "warnings": ["image « courbe.png » sans texte alternatif : écrire ![description](chemin)"]
+}

@@ -1,0 +1,9 @@
+{# figure · default : images dans la colonne de lecture, légende dessous. #}
+<figure {{ root_attrs(block) }}>
+  {% for image in images %}
+  <img src="{{ image.src }}" alt="{{ image.alt }}" loading="lazy" class="w-full rounded-lg bg-stone-100 dark:bg-stone-800{% if not loop.first %} mt-4{% endif %}">
+  {% endfor %}
+  {% if caption %}
+  <figcaption class="mecha-prose mt-3 text-sm text-stone-500 dark:text-stone-400">{{ caption | safe }}</figcaption>
+  {% endif %}
+</figure>

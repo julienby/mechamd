@@ -1,0 +1,8 @@
+{
+  "variant": "default",
+  "data": {
+    "images": [],
+    "caption": "<p>Photo à prendre demain.</p>\n"
+  },
+  "warnings": ["aucune image : écrire ![description](chemin)"]
+}

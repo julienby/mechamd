@@ -4,8 +4,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J2 terminé** — prochain : J3 (catalogue, directives ajoutées par agents)
-- Prochaine action : attendre les retours de l'humain sur la vitrine complète, puis ouvrir J3.
+- Jalon actif : **J3 — catalogue** (lot 1 : figure, steps, specs, stats)
+- Prochaine action : directive `steps`.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -53,6 +53,13 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 Pistes notées pour plus tard :
 - les titres des `section` n'apparaissent pas dans le sommaire (seuls les `##` du document) ;
 - polices chargées depuis Google Fonts : à héberger dans le thème avant J4 (hors-ligne).
+
+## J3 — Catalogue
+
+- ✅ `figure` (default, wide, gallery ; galerie devinée à 2 images) — 5 exemples
+- 🔄 `steps`
+- ⬜ `specs`
+- ⬜ `stats`
 
 ## Décisions
 
