@@ -1,0 +1,11 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "steps": [
+      {"title": "<p>couper le courant</p>\n", "body": ""},
+      {"title": "<p>débrancher la sonde</p>\n", "body": "<p>attention au fil rouge</p>\n"}
+    ]
+  },
+  "warnings": ["variante « court » (écrite sur le bloc) inexistante ; disponibles : default, compact"]
+}

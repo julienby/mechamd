@@ -232,6 +232,33 @@ La salle B204, relevé du 12 septembre.
 Le prototype, la salle, la mesure.
 :::
 
+## steps
+
+Une procédure écrite comme une liste ; la numérotation est recalculée.
+
+### default
+
+:::steps
+Pour flasher la carte BOB :
+
+1. Brancher la carte en USB, bouton **BOOT** enfoncé
+2. Lancer le flash
+   ```sh
+   pio run -t upload
+   ```
+3. Vérifier que la LED passe au vert
+:::
+
+### compact
+
+:::steps{.compact}
+- Couper le courant
+- Retirer le capot
+- Remplacer la sonde
+  Même référence : DS18B20 étanche.
+- Refermer et relancer l'acquisition
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

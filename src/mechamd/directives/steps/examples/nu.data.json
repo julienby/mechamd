@@ -1,0 +1,11 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Pour flasher la carte :</p>\n",
+    "steps": [
+      {"title": "<p>Brancher la carte en USB</p>\n", "body": ""},
+      {"title": "<p>Lancer le flash</p>\n", "body": "<pre><code class=\"language-sh\">pio run -t upload\n</code></pre>\n"},
+      {"title": "<p>Vérifier la LED <strong>verte</strong></p>\n", "body": ""}
+    ]
+  }
+}

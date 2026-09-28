@@ -1,0 +1,8 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Il faudra écrire la procédure.</p>\n",
+    "steps": []
+  },
+  "warnings": ["aucune étape : écrire une liste « 1. étape »"]
+}

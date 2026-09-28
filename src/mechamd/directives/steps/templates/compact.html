@@ -1,0 +1,19 @@
+{# steps · compact : numéros discrets, étapes resserrées (check-list de manip). #}
+<div {{ root_attrs(block) }}>
+  {% if intro %}
+  <div class="mecha-prose mb-4 text-base leading-relaxed">{{ intro | safe }}</div>
+  {% endif %}
+  <ol class="space-y-2">
+    {% for step in steps %}
+    <li class="flex gap-3">
+      <span aria-hidden="true" class="w-6 shrink-0 pt-1 text-right font-mono text-sm text-indigo-700 dark:text-indigo-300">{{ loop.index }}.</span>
+      <div class="min-w-0 flex-1">
+        <div class="mecha-prose text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ step.title | safe }}</div>
+        {% if step.body %}
+        <div class="mecha-prose mt-1 text-base leading-relaxed text-stone-500 dark:text-stone-400">{{ step.body | safe }}</div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</div>

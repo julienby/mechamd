@@ -1,0 +1,11 @@
+{
+  "variant": "compact",
+  "data": {
+    "intro": "",
+    "steps": [
+      {"title": "<p>Couper le courant</p>\n", "body": ""},
+      {"title": "<p>Retirer le capot</p>\n", "body": ""},
+      {"title": "<p>Remplacer la sonde</p>\n", "body": ""}
+    ]
+  }
+}

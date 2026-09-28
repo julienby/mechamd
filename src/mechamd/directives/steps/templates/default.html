@@ -1,0 +1,19 @@
+{# steps · default : une pastille numérotée par étape, le détail dessous. #}
+<div {{ root_attrs(block) }}>
+  {% if intro %}
+  <div class="mecha-prose mb-6 text-base leading-relaxed">{{ intro | safe }}</div>
+  {% endif %}
+  <ol class="space-y-6">
+    {% for step in steps %}
+    <li class="flex gap-4">
+      <span aria-hidden="true" class="flex size-8 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300">{{ loop.index }}</span>
+      <div class="min-w-0 flex-1 pt-1">
+        <div class="mecha-prose text-base leading-relaxed font-medium text-stone-900 dark:text-stone-50">{{ step.title | safe }}</div>
+        {% if step.body %}
+        <div class="mecha-prose mt-2 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ step.body | safe }}</div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</div>
