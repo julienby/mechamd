@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "Capteur DS18B20",
+    "image": null,
+    "alt": "",
+    "href": "ds18b20.md",
+    "action": "Voir la fiche",
+    "body": "<p>Sonde de température étanche, précision ±0,5 °C.</p>\n"
+  },
+  "warnings": []
+}

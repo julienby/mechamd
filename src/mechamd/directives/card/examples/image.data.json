@@ -1,0 +1,12 @@
+{
+  "variant": "image",
+  "data": {
+    "title": "Installation en B204",
+    "image": "photos/sonde.jpg",
+    "alt": "",
+    "href": null,
+    "action": null,
+    "body": "<p>Trois sondes fixées à 2 cm de la paroi.</p>\n"
+  },
+  "warnings": []
+}

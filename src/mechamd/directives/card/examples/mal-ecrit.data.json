@@ -1,0 +1,14 @@
+{
+  "variant": "image",
+  "data": {
+    "title": null,
+    "image": "schema.png",
+    "alt": "schéma",
+    "href": null,
+    "action": null,
+    "body": "<p>Pas de titre ici, juste une note rapide avec une image au milieu et du <strong>gras</strong>.</p>\n<p>Un lien <a href=\"note.md\">dans le texte</a> reste dans le texte.</p>\n"
+  },
+  "warnings": [
+    "variante « couverture » (écrite sur le bloc) inexistante ; disponibles : default, cover, image"
+  ]
+}

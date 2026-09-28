@@ -1,0 +1,20 @@
+{# card · image : image en haut (16/9), puis le texte. #}
+<article {{ root_attrs(block) }} class="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition duration-200 dark:border-stone-800 dark:bg-stone-900{% if href %} hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md dark:hover:border-indigo-500/50{% endif %}">
+  <img src="{{ image }}" alt="{{ alt }}" loading="lazy" class="aspect-video w-full bg-stone-100 object-cover dark:bg-stone-800">
+  {% if title or body or href %}
+  <div class="flex flex-1 flex-col gap-3 p-6">
+    {% if title %}
+    <h3 class="font-serif text-xl leading-snug font-semibold text-balance text-stone-900 dark:text-stone-50">{{ title }}</h3>
+    {% endif %}
+    {% if body %}
+    <div class="mecha-prose text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ body | safe }}</div>
+    {% endif %}
+    {% if href %}
+    <a href="{{ href }}" class="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-medium text-indigo-700 after:absolute after:inset-0 after:rounded-2xl dark:text-indigo-300">
+      {{ action }}
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 transition duration-200 group-hover:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    {% endif %}
+  </div>
+  {% endif %}
+</article>

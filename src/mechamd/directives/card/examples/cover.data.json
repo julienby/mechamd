@@ -1,0 +1,12 @@
+{
+  "variant": "cover",
+  "data": {
+    "title": "Salle B204",
+    "image": "photos/salle.jpg",
+    "alt": "Salle B204 vue de l'entrée",
+    "href": "manip-b204.md",
+    "action": "Ouvrir",
+    "body": "<p>Deux semaines de mesures, trois capteurs.</p>\n"
+  },
+  "warnings": []
+}
