@@ -63,6 +63,26 @@ def cmd_explain(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_build(args: argparse.Namespace) -> int:
+    from mechamd.build import build
+
+    report = build(args.project, args.output)
+    for warning in report.warnings:
+        print(f"! {warning}")
+    if report.css_error:
+        print(f"✗ CSS : {report.css_error}")
+    print(f"{len(report.pages)} pages, {len(report.assets)} fichiers copiés")
+    return 1 if report.css_error else 0
+
+
+def cmd_serve(args: argparse.Namespace) -> int:  # pragma: no cover - lance un serveur
+    from mechamd.serve import serve
+
+    print(f"mechamd sert {args.project} sur http://{args.host}:{args.port}/")
+    serve(args.project, args.host, args.port, reload=not args.no_reload)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="mecha", description="mechamd : Markdown → pages web.")
     parser.add_argument("--version", action="version", version=f"mechamd {__version__}")
@@ -79,6 +99,18 @@ def build_parser() -> argparse.ArgumentParser:
     explain.add_argument("file", help="document mechamd (.md), relatif au projet")
     explain.add_argument("-p", "--project", default=".", help="dossier du projet (défaut : .)")
     explain.set_defaults(func=cmd_explain)
+
+    build = sub.add_parser("build", help="construit un site statique")
+    build.add_argument("project", nargs="?", default=".", help="dossier du projet (défaut : .)")
+    build.add_argument("-o", "--output", help="dossier de sortie (défaut : <projet>/dist)")
+    build.set_defaults(func=cmd_build)
+
+    serve = sub.add_parser("serve", help="rendu live avec rechargement automatique")
+    serve.add_argument("project", nargs="?", default=".", help="dossier du projet (défaut : .)")
+    serve.add_argument("--host", default="127.0.0.1")
+    serve.add_argument("--port", type=int, default=8000)
+    serve.add_argument("--no-reload", action="store_true", help="sans rechargement (production)")
+    serve.set_defaults(func=cmd_serve)
     return parser
 
 
