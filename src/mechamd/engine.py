@@ -175,6 +175,7 @@ class Engine:
         content = self._render_tokens(tokens, 0, len(tokens), ctx, {})
         h1 = _first_h1(tokens)
         title = str(meta.get("title") or h1 or name or "Sans titre")
+        ctx.reports.sort(key=lambda r: r.line)  # enfants rendus avant leur parent
         for report in ctx.reports:
             warnings.extend(f"ligne {report.line} ({report.name}) : {w}" for w in report.warnings)
         layout = self.jinja.get_template("layout.html")

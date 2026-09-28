@@ -60,9 +60,9 @@ alt retombe
     blocks = engine.analyze(text)
     summary = [(b.variant, b.reason) for b in blocks]
     assert summary == [
+        ("default", "par défaut"),
         ("alt", "fixée par le parent"),
         ("default", "écrite sur le bloc"),
-        ("default", "par défaut"),
         ("alt", "devinée"),
         ("alt", "devinée"),
     ]
@@ -71,13 +71,13 @@ alt retombe
 
 def test_parent_variant_that_does_not_exist(engine: Engine) -> None:
     blocks = engine.analyze("::::probe{probe=zzz}\n:::probe\nfils\n:::\n::::\n")
-    assert blocks[0].variant == "default"
-    assert "fixée par le parent" in blocks[0].warnings[0]
+    assert blocks[1].variant == "default"
+    assert "fixée par le parent" in blocks[1].warnings[0]
 
 
 def test_children_are_rendered_before_parent(engine: Engine) -> None:
     page = engine.render_source("::::probe\n:::probe{#fils}\nfils\n:::\n::::\n")
-    parent = page.blocks[-1]
+    parent = page.blocks[0]
     assert parent.data["children"][0].startswith('<div data-mecha="probe" data-variant="default"')
     assert 'id="fils"' in page.body
 
@@ -119,7 +119,7 @@ def test_directive_inside_code_fence_is_not_a_block(engine: Engine) -> None:
 
 def test_md_helper_renders_nested_directives_without_double_report(engine: Engine) -> None:
     page = engine.render_source("::::empty\n:::probe\nx\n:::\n::::\n")
-    assert [b.name for b in page.blocks] == ["probe", "empty"]
+    assert [b.name for b in page.blocks] == ["empty", "probe"]
     assert page.body.count('data-mecha="probe"') == 1
 
 
