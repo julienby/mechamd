@@ -5,6 +5,7 @@ from __future__ import annotations
 from functools import cache
 
 from markdown_it import MarkdownIt
+from mdit_py_plugins.anchors import anchors_plugin
 from mdit_py_plugins.container import container_plugin
 from mdit_py_plugins.tasklists import tasklists_plugin
 
@@ -23,6 +24,7 @@ def create_md() -> MarkdownIt:
     md = MarkdownIt("commonmark", {"html": False, "typographer": False})
     md.enable(["table", "strikethrough"])
     md.use(tasklists_plugin)
+    md.use(anchors_plugin, min_level=2, max_level=3)
     md.use(container_plugin, name="directive", validate=_validate)
     return md
 

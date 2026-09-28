@@ -137,6 +137,7 @@ class Engine:
             lstrip_blocks=True,
         )
         self.jinja.globals["root_attrs"] = root_attrs
+        self.css_href = "_mecha/mecha.css"
 
     # --- API publique -------------------------------------------------
 
@@ -154,12 +155,20 @@ class Engine:
         ctx = _Context(lines=body.splitlines(), offset=offset, record=True, reports=[], ids=set())
         tokens = self.md.parse(body)
         content = self._render_tokens(tokens, 0, len(tokens), ctx, {})
-        title = str(meta.get("title") or _first_h1(tokens) or name or "Sans titre")
+        h1 = _first_h1(tokens)
+        title = str(meta.get("title") or h1 or name or "Sans titre")
         for report in ctx.reports:
             warnings.extend(f"ligne {report.line} ({report.name}) : {w}" for w in report.warnings)
         layout = self.jinja.get_template("layout.html")
         html = layout.render(
-            page={"title": title, "meta": meta, "warnings": warnings},
+            page={
+                "title": title,
+                "meta": meta,
+                "warnings": warnings,
+                "has_h1": h1 is not None,
+                "toc": _toc(tokens),
+                "css_href": self.css_href,
+            },
             content=Markup(content),
         )
         return Page(title, meta, content, html, ctx.reports, warnings)
@@ -348,3 +357,12 @@ def _first_h1(tokens: Sequence[Token]) -> str | None:
         if token.type == "heading_open" and token.tag == "h1" and token.level == 0:
             return tokens[k + 1].content
     return None
+
+
+def _toc(tokens: Sequence[Token]) -> list[dict[str, str]]:
+    """Titres `##` du document (hors blocs) pour le sommaire."""
+    return [
+        {"id": str(token.attrs.get("id", "")), "text": tokens[k + 1].content}
+        for k, token in enumerate(tokens)
+        if token.type == "heading_open" and token.tag == "h2" and token.level == 0
+    ]

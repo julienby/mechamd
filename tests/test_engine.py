@@ -147,3 +147,11 @@ def test_block_md_without_engine() -> None:
     from mechamd import Block
 
     assert Block(name="x").md("*a*") == "<p><em>a</em></p>\n"
+
+
+def test_layout_toc_and_title(engine: Engine) -> None:
+    text = "---\ntitle: Doc\ntags: [labo]\n---\n## Un\n\n## Deux\n\n## Trois\n"
+    page = engine.render_source(text)
+    assert 'aria-label="Sommaire"' in page.html
+    assert 'href="#un"' in page.html
+    assert "<h1" in page.html and "labo" in page.html
