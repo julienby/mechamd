@@ -19,7 +19,7 @@ les règles de contribution et [`PROGRESS.md`](PROGRESS.md) pour l'avancement.
 ```sh
 mecha serve mon-site/          # rendu live, rechargement automatique
 mecha build mon-site/ -o dist/ # site statique
-mecha explain mon-site/doc.md  # variante retenue et raison pour chaque bloc
+mecha explain doc.md -p mon-site/  # variante retenue et raison pour chaque bloc
 ```
 
 Directives fournies : `card`, `grid`, `callout`, `timeline`, `section` (voir le
