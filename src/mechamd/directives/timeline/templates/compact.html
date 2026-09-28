@@ -1,0 +1,23 @@
+{# timeline · compact : une ligne par date, pour les longues listes. #}
+<div {{ root_attrs(block) }}>
+  {% if intro %}
+  <div class="mecha-prose mb-6 text-base leading-relaxed">{{ intro | safe }}</div>
+  {% endif %}
+  <ol class="space-y-3">
+    {% for item in items %}
+    <li class="flex gap-4 sm:gap-6">
+      {% if item.date %}
+      <time datetime="{{ item.datetime }}" class="w-28 shrink-0 pt-0.5 text-sm font-medium text-stone-500 tabular-nums dark:text-stone-400">{{ item.date }}</time>
+      {% else %}
+      <span class="w-28 shrink-0"></span>
+      {% endif %}
+      <div class="min-w-0 flex-1">
+        <p class="text-base font-medium text-stone-900 dark:text-stone-50">{{ item.title }}</p>
+        {% if item.body %}
+        <div class="mecha-prose mt-1 text-sm leading-relaxed text-stone-500 dark:text-stone-400">{{ item.body | safe }}</div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</div>

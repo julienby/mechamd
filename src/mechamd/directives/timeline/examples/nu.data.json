@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "items": [
+      {"date": "2024", "datetime": "2024", "title": "Création du labo", "body": ""},
+      {"date": "mars 2025", "datetime": "2025-03", "title": "Premier prototype BOB", "body": ""},
+      {"date": "12/09/2026", "datetime": "2026-09-12", "title": "Déploiement en salle B204", "body": "<p>Trois capteurs, deux semaines de mesure.</p>\n"}
+    ]
+  },
+  "warnings": []
+}

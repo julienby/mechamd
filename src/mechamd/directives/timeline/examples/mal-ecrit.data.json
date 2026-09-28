@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Historique rapide du projet.</p>\n",
+    "items": [
+      {"date": "2024", "datetime": "2024", "title": "Création", "body": ""},
+      {"date": null, "datetime": null, "title": "un jour : réunion sans date", "body": ""},
+      {"date": "1er août 2026", "datetime": "2026-08-01", "title": "", "body": ""}
+    ]
+  },
+  "warnings": ["ligne 5 : date non reconnue dans « un jour : réunion sans date »"]
+}

@@ -1,0 +1,22 @@
+{# timeline · default : chronologie verticale, un repère par date. #}
+<div {{ root_attrs(block) }}>
+  {% if intro %}
+  <div class="mecha-prose mb-6 text-base leading-relaxed">{{ intro | safe }}</div>
+  {% endif %}
+  <ol class="space-y-8 border-l border-stone-200 dark:border-stone-800">
+    {% for item in items %}
+    <li class="relative pl-6">
+      <span aria-hidden="true" class="absolute top-1 -left-1.5 size-3 rounded-full border-2 border-stone-50 bg-indigo-600 dark:border-stone-950 dark:bg-indigo-400"></span>
+      {% if item.date %}
+      <time datetime="{{ item.datetime }}" class="text-sm font-medium text-indigo-700 dark:text-indigo-300">{{ item.date }}</time>
+      {% endif %}
+      {% if item.title %}
+      <p class="mt-1 font-serif text-xl leading-snug font-semibold text-balance text-stone-900 dark:text-stone-50">{{ item.title }}</p>
+      {% endif %}
+      {% if item.body %}
+      <div class="mecha-prose mt-2 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ item.body | safe }}</div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</div>
