@@ -4,9 +4,9 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J4 — publication** (🔄 en cours)
-- Prochaine action : README, push, CI verte.
-- En attente humaine : aucune bloquante.
+- Jalon actif : **J4 — publication** (⏸️ en attente humaine)
+- Prochaine action : après la publication, `pip install mechamd` depuis PyPI dans un conteneur vierge.
+- En attente humaine : éditeur de confiance sur pypi.org, environnement GitHub `pypi`, tag `v0.1.0`.
 
 ## J0 — Fondations
 
