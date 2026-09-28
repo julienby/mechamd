@@ -1,10 +1,18 @@
 [project]
 name = "mechamd"
-version = "0.0.1"
+version = "0.1.0"
 description = "Transforme des notes Markdown avec directives en belles pages web Tailwind."
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Julien Baudry" }]
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Markup :: Markdown",
+]
 dependencies = [
     "markdown-it-py>=3.0",
     "mdit-py-plugins>=0.4",
@@ -14,6 +22,9 @@ dependencies = [
     "uvicorn>=0.30",
     "watchfiles>=0.22",
 ]
+
+[project.urls]
+Repository = "https://github.com/julienby/mechamd"
 
 [project.scripts]
 mecha = "mechamd.cli:main"

@@ -384,4 +384,4 @@ mechamd/
 - [ ] Directive inconnue : afficher son texte en encadré discret, ou le rendre comme du Markdown normal ?
 - [ ] Jeu d'icônes : Lucide intégré en SVG, ou aucun en v0 ?
 - [ ] Direction visuelle : typographie et palette définitives, à valider au début de J1.
-- [ ] Licence : MIT ou Apache-2.0 ?
+- [x] Licence : MIT ou Apache-2.0 ? → MIT (2026-09-28).

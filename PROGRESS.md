@@ -4,8 +4,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J3 — catalogue** (lots 1 et 2 faits, vérifiés à l'œil)
-- Prochaine action : choix du lot suivant de J3 (ou passage à J4) par l'humain.
+- Jalon actif : **J4 — publication** (🔄 en cours)
+- Prochaine action : licence et métadonnées, puis polices hébergées.
 - En attente humaine : aucune bloquante.
 
 ## J0 — Fondations
@@ -65,6 +65,15 @@ Pistes notées pour plus tard :
 - ✅ `todo` (default ; `[ ]`/`[x]`, avancement fait/total) — 4 exemples
 - ✅ `links` (default ; `[titre](url) : description` ou URL nue, domaine affiché) — 4 exemples
 - ✅ `compare` (default ; une colonne par titre, 4 au plus par ligne) — 4 exemples
+
+## J4 — Publication
+
+- 🔄 Licence MIT, métadonnées du paquet
+- ⬜ Polices hébergées dans le thème
+- ⬜ `mecha llms` et `llms.txt`
+- ⬜ Test en conteneur vierge
+- ⬜ Workflow de publication (tag `v*`)
+- ⏸️ Publication sur PyPI (humain)
 
 ## Décisions
 
