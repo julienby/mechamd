@@ -1,0 +1,5 @@
+{
+  "variant": "tip",
+  "data": {"label": "Astuce", "kind": "tip", "title": "Gagner du temps", "body": "<p>Lancer <code>mecha serve</code> pendant l'écriture, la page se recharge seule.</p>\n"},
+  "warnings": []
+}

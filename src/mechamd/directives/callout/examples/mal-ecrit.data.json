@@ -1,0 +1,5 @@
+{
+  "variant": "warning",
+  "data": {"label": "Attention", "kind": "warning", "title": null, "body": "<p>Ne pas débrancher\npendant l'acquisition</p>\n"},
+  "warnings": ["variante « danger » (écrite sur le bloc) inexistante ; disponibles : default, info, tip, warning"]
+}

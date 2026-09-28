@@ -1,0 +1,5 @@
+{
+  "variant": "warning",
+  "data": {"label": "Attention", "kind": "warning", "title": null, "body": "<p>Recalibrer la sonde après chaque déplacement.</p>\n"},
+  "warnings": []
+}
