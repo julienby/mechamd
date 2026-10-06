@@ -113,3 +113,5 @@ Pistes notées pour plus tard :
 - 2026-10-06 — Simplification : PyPI abandonné (workflow, environnement `pypi`), mypy et couverture retirés, CI sur 3.12.
 - 2026-10-06 — Serveur sur `http.server`, rechargement par sondage ; `install.sh` (curl) et « Premier site » dans le README.
 - 2026-10-06 — `mecha new` ; installation curl vérifiée dans un conteneur vierge ; tag `v0.1.0`.
+- 2026-10-06 — Usage réel : site `../portfolio` (4 pages) et tuto `docs/tuto-portfolio.md`. Frottements : `uv --directory` crée le dossier dans le dépôt ; textes du portfolio à personnaliser.
+

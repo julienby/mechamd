@@ -33,6 +33,7 @@ mecha build mon-site          # le site statique (HTML + CSS) est dans mon-site/
 
 Un fichier `.md` = une page. Écrivez du Markdown ; ajoutez un bloc `:::directive` quand vous
 voulez une mise en forme (voir la liste ci-dessous).
+Tuto complet, pas à pas : [docs/tuto-portfolio.md](docs/tuto-portfolio.md).
 
 ## Utilisation
 
