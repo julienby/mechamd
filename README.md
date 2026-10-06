@@ -17,7 +17,7 @@ les règles de contribution et [`PROGRESS.md`](PROGRESS.md) pour l'avancement.
 ## Installation
 
 ```sh
-curl -LsSf https://raw.githubusercontent.com/julienby/mechamd/claude/mechamd-python-engine-nk250h/install.sh | sh
+curl -LsSf https://raw.githubusercontent.com/julienby/mechamd/main/install.sh | sh
 ```
 
 Le script installe `uv` s'il manque, puis mechamd depuis GitHub. Au premier `build` ou `serve`,
