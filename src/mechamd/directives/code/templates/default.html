@@ -1,0 +1,12 @@
+{# code · default : un cadre par extrait, barre de titre (fichier ou langage) et bouton copier. #}
+<div {{ root_attrs(block) }} class="space-y-4">
+  {% for snippet in snippets %}
+  <figure class="overflow-hidden rounded-2xl border border-stone-200 bg-stone-900 shadow-sm dark:border-stone-800">
+    <figcaption class="flex items-center justify-between border-b border-stone-800 px-4 py-2 text-xs font-medium text-stone-400">
+      <span class="font-mono">{{ snippet.title or snippet.lang or "code" }}</span>
+      <button type="button" data-mecha-copy class="rounded-lg px-2 py-1 transition duration-200 hover:bg-stone-800 hover:text-stone-50">Copier</button>
+    </figcaption>
+    <pre class="overflow-x-auto p-4 font-mono text-sm leading-relaxed text-stone-100"><code>{{ snippet.code }}</code></pre>
+  </figure>
+  {% endfor %}
+</div>

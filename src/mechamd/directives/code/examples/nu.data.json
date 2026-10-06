@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "snippets": [
+      {
+        "title": "install.sh",
+        "lang": "bash",
+        "code": "curl -fsSL https://example.org/install.sh | sh"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "variant": "default",
+  "data": {
+    "snippets": [
+      {
+        "title": "macOS",
+        "lang": "bash",
+        "code": "brew install mechamd"
+      },
+      {
+        "title": "Linux",
+        "lang": "bash",
+        "code": "curl -fsSL https://example.org/install.sh | sh"
+      }
+    ]
+  }
+}
