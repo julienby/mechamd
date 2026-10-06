@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "links": []
+  },
+  "warnings": [
+    "« Pas de lien ici. » ignoré : une ligne « [texte](url) » par bouton",
+    "aucun bouton : écrire une ligne « [texte](url) » par bouton"
+  ]
+}

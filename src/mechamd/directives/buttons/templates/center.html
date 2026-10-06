@@ -1,0 +1,6 @@
+{# buttons · center : le premier bouton est plein, les suivants sont discrets. #}
+<div {{ root_attrs(block) }} class="mx-auto flex max-w-2xl flex-wrap gap-3 justify-center">
+  {% for link in links %}
+  <a href="{{ link.href }}" class="rounded-lg px-6 py-3 text-sm font-medium transition duration-200 {% if loop.first %}bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600{% else %}bg-stone-100 text-stone-900 hover:bg-stone-200 dark:bg-stone-800/60 dark:text-stone-50 dark:hover:bg-stone-800{% endif %}">{{ link.text }}</a>
+  {% endfor %}
+</div>

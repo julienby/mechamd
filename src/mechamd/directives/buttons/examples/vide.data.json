@@ -1,0 +1,9 @@
+{
+  "variant": "default",
+  "data": {
+    "links": []
+  },
+  "warnings": [
+    "aucun bouton : écrire une ligne « [texte](url) » par bouton"
+  ]
+}

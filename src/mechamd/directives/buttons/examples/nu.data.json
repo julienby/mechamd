@@ -1,0 +1,15 @@
+{
+  "variant": "default",
+  "data": {
+    "links": [
+      {
+        "text": "Commencer",
+        "href": "/start.html"
+      },
+      {
+        "text": "Voir le code",
+        "href": "https://github.com/julienby/mechamd"
+      }
+    ]
+  }
+}
