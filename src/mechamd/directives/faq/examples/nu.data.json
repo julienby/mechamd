@@ -1,0 +1,16 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "questions": [
+      {
+        "question": "Faut-il installer Python ?",
+        "answer": "<p>Non : <code>install.sh</code> installe <code>uv</code>, qui s'occupe du reste.</p>\n"
+      },
+      {
+        "question": "Le site est-il statique ?",
+        "answer": "<p>Oui, <code>mecha build</code> produit du HTML.</p>\n"
+      }
+    ]
+  }
+}

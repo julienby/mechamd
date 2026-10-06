@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Les questions qui reviennent.</p>\n",
+    "questions": [
+      {
+        "question": "Combien ça coûte ?",
+        "answer": "<p>Rien.</p>\n<p>Le code est sous licence MIT.</p>\n"
+      }
+    ]
+  }
+}

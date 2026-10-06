@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Pas encore de questions.</p>\n",
+    "questions": []
+  },
+  "warnings": [
+    "aucune question : écrire une liste « - question » suivie de sa réponse indentée"
+  ]
+}

@@ -1,0 +1,16 @@
+{# faq · default : une question repliable par élément, dans un seul bloc. #}
+<div {{ root_attrs(block) }}>
+  {% if intro %}
+  <div class="mecha-prose mb-6 text-base leading-relaxed">{{ intro | safe }}</div>
+  {% endif %}
+  <div class="divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white shadow-sm dark:divide-stone-800 dark:border-stone-800 dark:bg-stone-900">
+    {% for item in questions %}
+    <details class="group">
+      <summary class="cursor-pointer p-6 font-serif text-xl leading-snug font-semibold text-stone-900 marker:text-indigo-700 dark:text-stone-50 dark:marker:text-indigo-300">{{ item.question }}</summary>
+      {% if item.answer %}
+      <div class="mecha-prose px-6 pb-6 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ item.answer | safe }}</div>
+      {% endif %}
+    </details>
+    {% endfor %}
+  </div>
+</div>

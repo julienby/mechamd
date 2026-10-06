@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "questions": [
+      {
+        "question": "Une question sans réponse",
+        "answer": ""
+      },
+      {
+        "question": "Une autre ?",
+        "answer": "<p>Avec réponse.</p>\n"
+      }
+    ]
+  },
+  "warnings": [
+    "« Une question sans réponse » : pas de réponse (l'indenter sous la question)",
+    "variante « long » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}
