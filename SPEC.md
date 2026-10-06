@@ -52,7 +52,7 @@ flowchart LR
 **Deux modes, un seul moteur**
 
 - `mecha build` : parcourt un dossier et écrit un site statique dans `dist/`, déployable n'importe où sans Python.
-- `mecha serve` : application ASGI (Starlette + uvicorn) qui rend chaque page à la requête, avec cache sur la date de modification et rechargement automatique du navigateur. Utilisable en développement comme en production.
+- `mecha serve` : serveur HTTP de la bibliothèque standard qui rend chaque page à la requête, avec cache sur la date de modification et rechargement automatique du navigateur (sondage de `/_mecha/version`). Serveur de développement ; pour la production, `mecha build` et un hébergement statique (ADR 0009).
 
 ## Format du document
 
@@ -284,7 +284,7 @@ Un seul moteur, en Python ≥ 3.11, géré avec uv, linté par ruff, typé avec 
 | Markdown | markdown-it-py + mdit-py-plugins (container, attrs) |
 | Frontmatter | python-frontmatter |
 | Templates | Jinja2 (autoescape activé) |
-| Mode live | Starlette + uvicorn, watchfiles pour le rechargement |
+| Mode live | `http.server` (bibliothèque standard), rechargement par sondage |
 | CSS | binaire autonome Tailwind CSS v4 (sans Node) |
 
 **Commandes v0**

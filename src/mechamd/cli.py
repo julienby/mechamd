@@ -120,7 +120,7 @@ def build_parser() -> argparse.ArgumentParser:
     serve.add_argument("project", nargs="?", default=".", help="dossier du projet (défaut : .)")
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8000)
-    serve.add_argument("--no-reload", action="store_true", help="sans rechargement (production)")
+    serve.add_argument("--no-reload", action="store_true", help="sans rechargement automatique")
     serve.set_defaults(func=cmd_serve)
     return parser
 

@@ -1,5 +1,7 @@
 # 0005 — Build, serveur live et CSS
 
+> Partie serveur (Starlette, SSE, watchfiles) remplacée par l'ADR 0009.
+
 **Contexte.** J2 : `mecha build`, `mecha serve`, compilation Tailwind sans Node.
 
 **Choix.**

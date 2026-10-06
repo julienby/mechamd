@@ -17,16 +17,28 @@ les règles de contribution et [`PROGRESS.md`](PROGRESS.md) pour l'avancement.
 ## Installation
 
 ```sh
-uv tool install git+https://github.com/julienby/mechamd
-# sans installer : uvx --from git+https://github.com/julienby/mechamd mecha build mon-site/
+curl -LsSf https://raw.githubusercontent.com/julienby/mechamd/claude/mechamd-python-engine-nk250h/install.sh | sh
 ```
 
-Au premier `build` ou `serve`, mechamd télécharge le binaire Tailwind CSS (réseau requis une fois).
+Le script installe `uv` s'il manque, puis mechamd depuis GitHub. Au premier `build` ou `serve`,
+mechamd télécharge le binaire Tailwind CSS (réseau requis une fois).
+
+## Premier site
+
+```sh
+mkdir mon-site && cd mon-site
+printf '# Bonjour\n\n:::callout\nÇa marche.\n:::\n' > index.md
+mecha serve        # http://127.0.0.1:8000/, la page se recharge à chaque enregistrement
+mecha build -o dist/   # le site statique (HTML + CSS) est dans dist/
+```
+
+Un fichier `.md` = une page. Écrivez du Markdown ; ajoutez un bloc `:::directive` quand vous
+voulez une mise en forme (voir la liste ci-dessous).
 
 ## Utilisation
 
 ```sh
-mecha serve mon-site/          # rendu live, rechargement automatique
+mecha serve mon-site/          # rendu live, rechargement automatique (serveur de développement)
 mecha build mon-site/ -o dist/ # site statique
 mecha explain doc.md -p mon-site/  # variante retenue et raison pour chaque bloc
 mecha llms -p mon-site/        # syntaxe et directives, à donner à un LLM

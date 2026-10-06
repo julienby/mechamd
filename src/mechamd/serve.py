@@ -1,35 +1,44 @@
-"""`mecha serve` : rendu à la requête (Starlette), cache sur la date de modification,
-rechargement automatique du navigateur quand un document ou un template change."""
+"""`mecha serve` : rendu à la requête (bibliothèque standard), cache sur la date de
+modification, rechargement automatique du navigateur quand un document ou un template change."""
 
 from __future__ import annotations
 
-import asyncio
-from collections.abc import AsyncIterator
+import mimetypes
+import threading
 from dataclasses import dataclass, field
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-
-from starlette.applications import Starlette
-from starlette.requests import Request
-from starlette.responses import (
-    FileResponse,
-    HTMLResponse,
-    RedirectResponse,
-    Response,
-    StreamingResponse,
-)
-from starlette.routing import Route
+from urllib.parse import unquote, urlsplit
 
 from mechamd.css import compile_css, fonts_dir
 from mechamd.directive import BUILTIN_DIR
 from mechamd.engine import THEMES_DIR, Engine
 
+# Le navigateur interroge /_mecha/version chaque seconde et recharge quand la valeur change.
 RELOAD_SCRIPT = """<script>
-  (() => {
-    const events = new EventSource("/_mecha/events");
-    events.onmessage = () => location.reload();
+  (async () => {
+    let seen = null;
+    for (;;) {
+      try {
+        const version = await (await fetch("/_mecha/version")).text();
+        if (seen !== null && version !== seen) location.reload();
+        seen = version;
+      } catch (e) {}
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
   })();
 </script>
 """
+
+IGNORED_DIRS = {".mecha", "dist", "__pycache__", ".git"}
+
+
+@dataclass
+class Reply:
+    status: int = 200
+    content_type: str = "text/html; charset=utf-8"
+    body: bytes = b""
+    location: str | None = None
 
 
 def _code_signature(project: Path) -> str:
@@ -72,6 +81,40 @@ class Site:
             candidate = candidate.with_suffix(".md")
         return candidate if candidate.is_file() else None
 
+    def version(self) -> str:
+        """Change dès qu'un fichier du projet, une directive ou un thème est modifié."""
+        newest = 0
+        for root in (self.project, BUILTIN_DIR, THEMES_DIR):
+            for file in root.rglob("*"):
+                if file.is_file() and not IGNORED_DIRS.intersection(file.parts):
+                    newest = max(newest, file.stat().st_mtime_ns)
+        return str(newest)
+
+    def respond(self, raw_path: str) -> Reply:
+        """Chemin de la requête (avec ou sans `?query`) → réponse."""
+        path = unquote(urlsplit(raw_path).path).lstrip("/")
+        if path == "_mecha/mecha.css":
+            result = compile_css(self.engine)
+            if result.error is not None or result.path is None:
+                return Reply(content_type="text/css", body=f"/* {result.error} */".encode())
+            return Reply(content_type="text/css", body=result.path.read_bytes())
+        if path == "_mecha/version":
+            return Reply(content_type="text/plain", body=self.version().encode())
+        if path.startswith("_mecha/fonts/"):
+            fonts = fonts_dir(self.engine)
+            file = fonts / path.removeprefix("_mecha/fonts/") if fonts else None
+            if file is None or not file.is_file() or file.resolve().parent != fonts.resolve():
+                return Reply(404, "text/plain", b"404")
+            return _file(file)
+        if path and not path.endswith("/") and (self.project / path).is_dir():
+            return Reply(307, location=f"/{path}/")
+        file = self.resolve(path)
+        if file is None:
+            return Reply(404, body=b"<h1>404</h1><p>Page introuvable.</p>")
+        if file.suffix == ".md":
+            return Reply(body=self.render(file).encode())
+        return _file(file)
+
     def render(self, file: Path) -> str:
         engine = self.engine
         mtime = file.stat().st_mtime_ns
@@ -85,68 +128,41 @@ class Site:
         return html
 
 
-def create_app(project: str | Path = ".", *, reload: bool = True) -> Starlette:
+def _file(file: Path) -> Reply:
+    # `.woff2` écrit en dur : sans /etc/mime.types (image Docker slim), Python ne le connaît pas.
+    kind = "font/woff2" if file.suffix == ".woff2" else mimetypes.guess_type(file)[0]
+    return Reply(content_type=kind or "application/octet-stream", body=file.read_bytes())
+
+
+def make_server(
+    project: str | Path, host: str, port: int, *, reload: bool = True
+) -> ThreadingHTTPServer:
     site = Site(project=Path(project).resolve(), reload=reload)
+    lock = threading.Lock()
 
-    async def page(request: Request) -> Response:
-        url_path = request.path_params.get("path", "")
-        if url_path and not url_path.endswith("/") and (site.project / url_path).is_dir():
-            return RedirectResponse(f"/{url_path}/")
-        file = site.resolve(url_path)
-        if file is None:
-            return HTMLResponse("<h1>404</h1><p>Page introuvable.</p>", status_code=404)
-        if file.suffix == ".md":
-            return HTMLResponse(site.render(file))
-        return FileResponse(file)
+    class Handler(BaseHTTPRequestHandler):
+        def do_GET(self) -> None:
+            with lock:
+                reply = site.respond(self.path)
+            self.send_response(reply.status)
+            self.send_header("Content-Type", reply.content_type)
+            self.send_header("Content-Length", str(len(reply.body)))
+            if reply.location:
+                self.send_header("Location", reply.location)
+            self.end_headers()
+            self.wfile.write(reply.body)
 
-    async def css(request: Request) -> Response:
-        result = await asyncio.to_thread(compile_css, site.engine)
-        if result.error is not None:
-            return Response(f"/* {result.error} */", media_type="text/css")
-        return FileResponse(result.path, media_type="text/css")
+        def log_message(self, format: str, *args: object) -> None:
+            pass
 
-    async def font(request: Request) -> Response:
-        fonts = fonts_dir(site.engine)
-        file = fonts / request.path_params["name"] if fonts else None
-        if file is None or not file.is_file():
-            return Response("404", status_code=404)
-        # Écrit en dur : sans /etc/mime.types (image Docker slim), Python ne connaît pas `.woff2`.
-        return FileResponse(file, media_type="font/woff2" if file.suffix == ".woff2" else None)
-
-    async def events(request: Request) -> Response:
-        return StreamingResponse(_changes(site, request), media_type="text/event-stream")
-
-    routes = [
-        Route("/_mecha/mecha.css", css),
-        Route("/_mecha/fonts/{name}", font),
-        Route("/_mecha/events", events),
-        Route("/", page),
-        Route("/{path:path}", page),
-    ]
-    return Starlette(routes=routes)
-
-
-async def _changes(site: Site, request: Request) -> AsyncIterator[str]:  # pragma: no cover
-    """Flux SSE : un message à chaque changement de fichier du projet ou des thèmes."""
-    from watchfiles import awatch
-
-    stop = asyncio.Event()
-    watched = [site.project, BUILTIN_DIR, THEMES_DIR]
-    yield ": connecté\n\n"
-    async for _ in awatch(*watched, stop_event=stop, watch_filter=_watch_filter):
-        if await request.is_disconnected():
-            stop.set()
-            break
-        yield "data: reload\n\n"
-
-
-def _watch_filter(change: object, path: str) -> bool:  # pragma: no cover
-    parts = Path(path).parts
-    return not any(p in {".mecha", "dist", "__pycache__", ".git"} for p in parts)
+    return ThreadingHTTPServer((host, port), Handler)
 
 
 def serve(project: str | Path, host: str, port: int, reload: bool) -> None:  # pragma: no cover
-    import uvicorn
-
-    app = create_app(project, reload=reload)
-    uvicorn.run(app, host=host, port=port, log_level="warning")
+    server = make_server(project, host, port, reload=reload)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()

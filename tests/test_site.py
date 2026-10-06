@@ -1,17 +1,18 @@
 import mimetypes
 import os
 import stat
+import threading
+import urllib.request
 from pathlib import Path
 
 import pytest
-from starlette.testclient import TestClient
 
 from mechamd import Engine
 from mechamd.build import build
 from mechamd.cli import main
 from mechamd.css import CssResult, compile_css, find_tailwind, input_css, signature
 from mechamd.engine import rewrite_md_links
-from mechamd.serve import create_app
+from mechamd.serve import Site, make_server
 
 FAKE_TAILWIND = """#!/bin/sh
 # faux Tailwind : écrit le fichier -o et compte ses appels
@@ -145,37 +146,56 @@ def test_build_reports_css_error(
 def test_serve(site: Path, tailwind: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     # Sans /etc/mime.types (image Docker slim), Python ne connaît pas `.woff2`.
     monkeypatch.setattr(mimetypes, "_db", mimetypes.MimeTypes())
-    client = TestClient(create_app(site))
-    home = client.get("/")
-    assert home.status_code == 200 and "Accueil" in home.text
-    assert "EventSource" in home.text
-    assert client.get("/index.html").text == home.text  # servi depuis le cache
-    assert "B204" in client.get("/notes/b204.html").text
-    assert client.get("/notes/b204.md").status_code == 200
-    redirect = client.get("/notes", follow_redirects=False)
-    assert redirect.status_code == 307 and redirect.headers["location"] == "/notes/"
-    assert "Notes" in client.get("/notes/").text
-    assert client.get("/photos/a.svg").text == "<svg/>"
-    assert client.get("/absent.html").status_code == 404
-    assert client.get("/../../etc/passwd").status_code == 404
-    css = client.get("/_mecha/mecha.css")
-    assert css.status_code == 200 and css.text == "/* css */\n"
-    font = client.get("/_mecha/fonts/inter-latin-wght-normal.woff2")
-    assert font.status_code == 200 and font.headers["content-type"] == "font/woff2"
-    assert client.get("/_mecha/fonts/absent.woff2").status_code == 404
-    assert client.get("/_mecha/fonts/..").status_code == 404
+    app = Site(site.resolve())
+    home = app.respond("/")
+    assert home.status == 200 and b"Accueil" in home.body
+    assert b"_mecha/version" in home.body
+    assert app.respond("/index.html").body == home.body  # servi depuis le cache
+    assert b"B204" in app.respond("/notes/b204.html?x=1").body
+    assert app.respond("/notes/b204.md").status == 200
+    redirect = app.respond("/notes")
+    assert redirect.status == 307 and redirect.location == "/notes/"
+    assert b"Notes" in app.respond("/notes/").body
+    assert app.respond("/photos/a.svg").body == b"<svg/>"
+    assert app.respond("/photos/a.svg").content_type == "image/svg+xml"
+    assert app.respond("/absent.html").status == 404
+    assert app.respond("/../../etc/passwd").status == 404
+    assert app.respond("//etc/passwd").status == 404
+    css = app.respond("/_mecha/mecha.css")
+    assert css.status == 200 and css.body == b"/* css */\n"
+    font = app.respond("/_mecha/fonts/inter-latin-wght-normal.woff2")
+    assert font.status == 200 and font.content_type == "font/woff2"
+    assert app.respond("/_mecha/fonts/absent.woff2").status == 404
+    assert app.respond("/_mecha/fonts/..").status == 404
 
 
 def test_serve_picks_up_changes(site: Path, tailwind: Path) -> None:
-    client = TestClient(create_app(site, reload=False))
-    assert "EventSource" not in client.get("/").text
+    app = Site(site.resolve(), reload=False)
+    assert b"_mecha/version" not in app.respond("/").body
+    before = app.respond("/_mecha/version").body
     page = site / "index.md"
     page.write_text("# Changé\n")
     os.utime(page, ns=(1, 2))
-    assert "Changé" in client.get("/").text
+    assert "Changé" in app.respond("/").body.decode()
+    assert app.respond("/_mecha/version").body == before  # mtime ancien : même version
+    page.write_text("# Encore\n")
+    assert app.respond("/_mecha/version").body != before
+
+
+def test_serve_over_http(site: Path, tailwind: Path) -> None:
+    server = make_server(site, "127.0.0.1", 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        url = f"http://127.0.0.1:{server.server_address[1]}"
+        with urllib.request.urlopen(f"{url}/") as response:
+            assert response.status == 200 and b"Accueil" in response.read()
+    finally:
+        server.shutdown()
+        server.server_close()
 
 
 def test_serve_css_error(site: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr("mechamd.serve.compile_css", failed)
-    css = TestClient(create_app(site)).get("/_mecha/mecha.css")
-    assert css.status_code == 200 and "pas de binaire" in css.text
+    css = Site(site.resolve()).respond("/_mecha/mecha.css")
+    assert css.status == 200 and b"pas de binaire" in css.body

@@ -84,6 +84,7 @@ Pistes notées pour plus tard :
 - ADR 0006 — layouts de page (`base.html` + `layouts/`)
 - ADR 0007 — licence MIT, polices hébergées (partie PyPI remplacée par 0008)
 - ADR 0008 — pas de PyPI, outillage allégé
+- ADR 0009 — `mecha serve` sur la bibliothèque standard (7 → 4 dépendances)
 
 ## Journal
 
@@ -110,3 +111,4 @@ Pistes notées pour plus tard :
 - 2026-09-28 — J4 : `mecha llms`. Test en conteneur vierge : deux défauts trouvés et corrigés
   (`--version` affichait 0.0.1 ; police servie en `application/octet-stream` faute de `/etc/mime.types`).
 - 2026-10-06 — Simplification : PyPI abandonné (workflow, environnement `pypi`), mypy et couverture retirés, CI sur 3.12.
+- 2026-10-06 — Serveur sur `http.server`, rechargement par sondage ; `install.sh` (curl) et « Premier site » dans le README.
