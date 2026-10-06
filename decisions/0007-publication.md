@@ -1,5 +1,7 @@
 # 0007 — Licence, polices et publication
 
+> Partie publication PyPI remplacée par l'ADR 0008.
+
 **Contexte.** J4 publie mechamd sur PyPI. Il faut une licence, un rendu qui
 marche hors-ligne, et une façon de publier sans jeton sur un poste.
 

@@ -4,9 +4,8 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 
 ## État courant
 
-- Jalon actif : **J4 — publication** (⏸️ en attente humaine)
-- Prochaine action : après la publication, `pip install mechamd` depuis PyPI dans un conteneur vierge.
-- En attente humaine : éditeur de confiance sur pypi.org, environnement GitHub `pypi`, tag `v0.1.0`.
+- Jalon actif : aucun, J0 à J4 terminés (pas de PyPI, ADR 0008)
+- Prochaine action : tag `v0.1.0` si souhaité ; installation depuis GitHub dans un conteneur vierge.
 
 ## J0 — Fondations
 
@@ -72,8 +71,8 @@ Pistes notées pour plus tard :
 - ✅ Polices hébergées dans le thème (woff2 latin Fontsource, OFL ; servies sous `_mecha/fonts/`)
 - ✅ `mecha llms [-p projet]` et `llms.txt` (test de fraîcheur : régénérer si un README change)
 - ✅ Test en conteneur vierge (`python:3.12-slim` : wheel, `mecha build`, `mecha serve`, 3 × HTTP 200)
-- ✅ Workflow de publication `publish.yml` (tag `v*` = version, build, garde-fou, Trusted Publishing)
-- ⏸️ Publication sur PyPI (humain)
+- ✅ Publication PyPI abandonnée : installation depuis GitHub, `publish.yml` supprimé (ADR 0008)
+- ✅ Outillage allégé : plus de mypy ni de couverture, CI sur Python 3.12
 
 ## Décisions
 
@@ -83,7 +82,8 @@ Pistes notées pour plus tard :
 - ADR 0004 — direction visuelle du thème default (✅ validée, version de départ)
 - ADR 0005 — build, serveur live et compilation CSS
 - ADR 0006 — layouts de page (`base.html` + `layouts/`)
-- ADR 0007 — publication : licence MIT, polices hébergées, PyPI par workflow sur tag
+- ADR 0007 — licence MIT, polices hébergées (partie PyPI remplacée par 0008)
+- ADR 0008 — pas de PyPI, outillage allégé
 
 ## Journal
 
@@ -109,3 +109,4 @@ Pistes notées pour plus tard :
   à Google Fonts ; vérifié dans le navigateur (5 polices chargées depuis `_mecha/fonts/`).
 - 2026-09-28 — J4 : `mecha llms`. Test en conteneur vierge : deux défauts trouvés et corrigés
   (`--version` affichait 0.0.1 ; police servie en `application/octet-stream` faute de `/etc/mime.types`).
+- 2026-10-06 — Simplification : PyPI abandonné (workflow, environnement `pypi`), mypy et couverture retirés, CI sur 3.12.

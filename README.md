@@ -17,7 +17,8 @@ les règles de contribution et [`PROGRESS.md`](PROGRESS.md) pour l'avancement.
 ## Installation
 
 ```sh
-pip install mechamd    # ou : uv tool install mechamd
+uv tool install git+https://github.com/julienby/mechamd
+# sans installer : uvx --from git+https://github.com/julienby/mechamd mecha build mon-site/
 ```
 
 Au premier `build` ou `serve`, mechamd télécharge le binaire Tailwind CSS (réseau requis une fois).
@@ -48,13 +49,11 @@ Directives fournies : `card`, `grid`, `callout`, `timeline`, `section`, `figure`
 uv sync
 uv run mecha test      # exemples des directives
 uv run pytest          # tests du noyau
-uv run ruff check . && uv run mypy
+uv run ruff check .
 uv run mecha llms > llms.txt   # après un changement de README de directive
 ```
 
-## Publication
+## Versions
 
-1. Mettre à jour `version` dans `pyproject.toml` ; CI verte.
-2. `git tag vX.Y.Z && git push origin vX.Y.Z` : le workflow `publish.yml` vérifie que le tag
-   égale la version, construit, teste le wheel et publie sur PyPI (Trusted Publishing,
-   environnement GitHub `pypi`).
+Mettre à jour `version` dans `pyproject.toml`, CI verte, puis `git tag vX.Y.Z && git push origin vX.Y.Z`.
+mechamd n'est pas publié sur PyPI (ADR 0008).

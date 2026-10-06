@@ -31,15 +31,13 @@ appliquer à chaque tâche.
 ## Escalade humaine (s'arrêter et demander)
 
 - validation de la direction visuelle (J1) ;
-- toute modification du contrat `Block` ou de l'ordre de résolution des variantes ;
-- publication sur PyPI.
+- toute modification du contrat `Block` ou de l'ordre de résolution des variantes.
 
 ## Vérifications locales avant chaque push
 
 ```sh
 uv run ruff check .
 uv run ruff format --check .
-uv run mypy
 uv run pytest
 uv run mecha test
 ```

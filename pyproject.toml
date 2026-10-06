@@ -32,9 +32,7 @@ mecha = "mechamd.cli:main"
 [dependency-groups]
 dev = [
     "pytest>=8",
-    "pytest-cov>=5",
     "ruff>=0.6",
-    "mypy>=1.11",
     "httpx2>=2.13.1",
 ]
 
@@ -53,18 +51,5 @@ extend-exclude = ["SPEC.md"]
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
 
-[tool.mypy]
-strict = true
-files = ["src", "tests"]
-exclude = ["tests/fixtures/"]
-mypy_path = "src"
-explicit_package_bases = true
-python_version = "3.11"
-
-[[tool.mypy.overrides]]
-module = ["frontmatter", "frontmatter.*"]
-ignore_missing_imports = true
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=mechamd --cov-report=term-missing --cov-fail-under=85"
