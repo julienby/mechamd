@@ -421,6 +421,52 @@ Je réponds en général sous deux jours.
 [Envoyer un message](mailto:moi@example.org)
 :::
 
+## pricing
+
+Des offres côte à côte ; `recommended=` met l'une d'elles en avant.
+
+:::pricing{recommended=Pro}
+## Gratuit : 0 €
+- Un site
+- Export HTML
+
+## Pro : 9 € /mois
+- Sites illimités
+- Domaine perso
+- Support prioritaire
+
+[Choisir Pro](https://example.org/pro)
+
+## Équipe : 29 € /mois
+- Tout Pro
+- Comptes partagés
+
+[Nous écrire](mailto:moi@example.org)
+:::
+
+## code
+
+Une commande à recopier : barre de titre et bouton « Copier ».
+
+:::code{file=install.sh}
+```bash
+curl -fsSL https://example.org/install.sh | sh
+```
+:::
+
+## buttons
+
+Le premier bouton est plein, les suivants sont discrets.
+
+:::buttons
+[Commencer](#typographie)
+[Voir le code](https://github.com/julienby/mechamd)
+:::
+
+:::buttons{.center}
+[Télécharger](#typographie)
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

@@ -49,11 +49,16 @@ contenu Markdown
 | des liens commentés | `links` |
 | une liste de tâches | `todo` |
 | inviter à agir (contact, essai) | `cta` |
+| comparer des offres, des tarifs | `pricing` |
+| un extrait de code ou une commande copiable | `code` |
+| des boutons d'action (liens) | `buttons` (`.center`) |
 
 ## Construire une page
 
 1. Un fichier `.md` par page ; frontmatter `title`, et `layout: page` pour un accueil
-   (`article` par défaut).
+   (`article` par défaut). `layout: landing` (titre affiche + `lead:`) pour une page
+   de vente, `layout: docs` (sommaire latéral) pour une documentation. `nav:`
+   (`libellé: lien`) ajoute un menu à l'en-tête.
 2. Écrire d'abord le texte en Markdown ; ajouter une directive seulement quand elle
    apporte une forme.
 3. Commencer par la forme nue (`:::stats` sans attribut) : le moteur devine.

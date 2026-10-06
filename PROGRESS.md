@@ -5,6 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : aucun, J0 à J4 terminés (pas de PyPI, ADR 0008)
+- ✅ Fait : kit « shadcn » — composants `pricing`, `code`, `buttons`, layouts `landing`, `docs` (ADR 0010, sans nouveau token).
 - Prochaine action : usage réel sur un vrai site ; autres directives selon les besoins (voir catalogue élargi).
 
 ## J0 — Fondations

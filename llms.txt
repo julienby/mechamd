@@ -41,11 +41,16 @@ contenu Markdown
 | des liens commentés | `links` |
 | une liste de tâches | `todo` |
 | inviter à agir (contact, essai) | `cta` |
+| comparer des offres, des tarifs | `pricing` |
+| un extrait de code ou une commande copiable | `code` |
+| des boutons d'action (liens) | `buttons` (`.center`) |
 
 ## Construire une page
 
 1. Un fichier `.md` par page ; frontmatter `title`, et `layout: page` pour un accueil
-   (`article` par défaut).
+   (`article` par défaut). `layout: landing` (titre affiche + `lead:`) pour une page
+   de vente, `layout: docs` (sommaire latéral) pour une documentation. `nav:`
+   (`libellé: lien`) ajoute un menu à l'en-tête.
 2. Écrire d'abord le texte en Markdown ; ajouter une directive seulement quand elle
    apporte une forme.
 3. Commencer par la forme nue (`:::stats` sans attribut) : le moteur devine.
@@ -60,6 +65,43 @@ contenu Markdown
    bloc), puis `mecha build`.
 
 Les sections suivantes sont les README des directives disponibles.
+
+## buttons
+
+**Rôle** : une rangée de boutons (le premier plein, les suivants discrets), sous
+un titre ou une accroche.
+
+### Syntaxe
+
+```markdown
+:::buttons
+[Commencer](start.md)
+[Voir le code](https://github.com/julienby/mechamd)
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `links` | chaque ligne `[texte](url)` seule | — |
+
+Pas de variante devinée.
+
+Avertissements : aucun bouton ; ligne qui n'est pas un lien seul (ignorée).
+
+### Variantes
+
+- `default` : alignés à gauche.
+- `center` : centrés, pour sous un titre de page d'accueil.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu`, `centre`, `mal-ecrit`, `vide`.
 
 ## callout
 
@@ -145,6 +187,45 @@ Avec un lien, toute la carte est cliquable.
 Voir `examples/` : `simple` (cas nu), `image` (devinée), `cover` (explicite,
 avec `#id` et `href=`), `mal-ecrit` (variante inconnue, image au milieu du
 texte, pas de titre), `vide`.
+
+## code
+
+**Rôle** : un bloc de code présenté (nom de fichier, bouton « copier »), pour
+une commande à recopier ou un extrait de configuration.
+
+### Syntaxe
+
+````markdown
+:::code{file=install.sh}
+```bash
+curl -fsSL https://example.org/install.sh | sh
+```
+:::
+````
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `snippets` | chaque bloc clôturé du contenu | — |
+| `title` d'un extrait | `{title=…}` après le langage ; sinon le langage | `file=` (un seul extrait) |
+
+Pas de variante devinée. Plusieurs extraits : empilés, chacun avec son titre
+(`bash {title=Linux}`).
+
+Avertissements : aucun bloc de code.
+
+### Variantes
+
+- `default` : cadre sombre, barre de titre, bouton « Copier ».
+
+### Attributs
+
+- `file` : titre de l'extrait quand il n'y en a qu'un.
+
+### Exemples
+
+Voir `examples/` : `nu`, `plusieurs`, `mal-ecrit` (pas de bloc de code), `vide`.
 
 ## compare
 
@@ -512,6 +593,52 @@ Aucun.
 
 Voir `examples/` : `nu` (cas nu), `bio` (présentations indentées, séparateur `|`),
 `mal-ecrit` (nom seul, variante inconnue), `vide`.
+
+## pricing
+
+**Rôle** : des offres côte à côte (nom, prix, points, bouton), pour une page produit.
+
+### Syntaxe
+
+```markdown
+:::pricing{recommended=Pro}
+## Gratuit : 0 €
+- Un site
+
+## Pro : 9 € /mois
+- Sites illimités
+- Domaine perso
+
+[Choisir Pro](https://example.org/pro)
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| une offre | chaque titre `## Nom : prix` | — |
+| `amount`, `period` | le prix ; « /mois » à la fin devient la période | — |
+| `points` | les puces sous le titre | — |
+| `action` | le lien seul sur la dernière ligne de l'offre | — |
+| `recommended` | aucune | `recommended=Nom` |
+
+Pas de variante devinée. Colonnes : une par offre, 3 au plus.
+
+Avertissements : aucune offre ; titre sans « : » ; `recommended` sans offre de ce nom.
+
+### Variantes
+
+- `default` : une carte par offre ; l'offre recommandée a un trait et un bouton d'accent.
+
+### Attributs
+
+- `recommended` : nom de l'offre à mettre en avant.
+
+### Exemples
+
+Voir `examples/` : `nu`, `recommande`, `mal-ecrit` (offre sans titre, variante
+inconnue), `vide`.
 
 ## quote
 
