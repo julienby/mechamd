@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "features": [
+      {
+        "title": "Sans réglage",
+        "text": "<p>le moteur devine la présentation.</p>\n"
+      },
+      {
+        "title": "Statique",
+        "text": "<p>du HTML à héberger partout.</p>\n"
+      },
+      {
+        "title": "Lisible",
+        "text": "<p>un fichier Markdown reste un texte.</p>\n"
+      }
+    ]
+  }
+}

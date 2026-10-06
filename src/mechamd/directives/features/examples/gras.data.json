@@ -1,0 +1,16 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>Pourquoi mechamd.</p>\n",
+    "features": [
+      {
+        "title": "Simple",
+        "text": "<p>Un fichier, une page.</p>\n"
+      },
+      {
+        "title": "Sobre",
+        "text": "<p>peu de dépendances</p>\n"
+      }
+    ]
+  }
+}

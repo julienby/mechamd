@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>À venir.</p>\n",
+    "features": []
+  },
+  "warnings": [
+    "aucun point : écrire une liste « - titre : phrase »"
+  ]
+}

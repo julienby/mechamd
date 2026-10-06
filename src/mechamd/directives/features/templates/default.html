@@ -1,0 +1,17 @@
+{# features · default : une tuile par point, 3 colonnes au plus. #}
+{% set columns = {0: "", 1: "", 2: "sm:grid-cols-2"} %}
+<div {{ root_attrs(block) }}>
+  {% if intro %}
+  <div class="mecha-prose mb-6 text-base leading-relaxed">{{ intro | safe }}</div>
+  {% endif %}
+  <ul class="grid gap-4 {{ columns.get(features | length, "sm:grid-cols-2 lg:grid-cols-3") }}">
+    {% for feature in features %}
+    <li class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+      <h3 class="font-serif text-xl leading-snug font-semibold text-stone-900 dark:text-stone-50">{{ feature.title }}</h3>
+      {% if feature.text %}
+      <div class="mecha-prose mt-2 text-base leading-relaxed text-stone-700 dark:text-stone-300">{{ feature.text | safe }}</div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>

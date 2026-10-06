@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "features": [
+      {
+        "title": "Rapide",
+        "text": "<p>tout est local.</p>\n"
+      },
+      {
+        "title": "Sans phrase",
+        "text": ""
+      }
+    ]
+  },
+  "warnings": [
+    "« Sans phrase » : ajouter « : une phrase » ou un texte indenté",
+    "variante « large » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}
