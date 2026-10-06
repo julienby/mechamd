@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>L'équipe.</p>\n",
+    "people": [
+      {
+        "name": "Camille Durand",
+        "role": "biologiste",
+        "initials": "CD",
+        "bio": "<p>Responsable des manips.</p>\n"
+      },
+      {
+        "name": "Alex Martin",
+        "role": "électronicien",
+        "initials": "AM",
+        "bio": "<p>Câblage et firmware.</p>\n"
+      }
+    ]
+  }
+}

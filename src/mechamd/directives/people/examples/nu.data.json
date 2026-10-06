@@ -1,0 +1,20 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "",
+    "people": [
+      {
+        "name": "Camille Durand",
+        "role": "biologiste",
+        "initials": "CD",
+        "bio": ""
+      },
+      {
+        "name": "Alex Martin",
+        "role": "électronicien",
+        "initials": "AM",
+        "bio": ""
+      }
+    ]
+  }
+}

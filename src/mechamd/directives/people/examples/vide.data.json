@@ -1,0 +1,10 @@
+{
+  "variant": "default",
+  "data": {
+    "intro": "<p>À présenter.</p>\n",
+    "people": []
+  },
+  "warnings": [
+    "aucune personne : écrire une liste « - Nom : rôle »"
+  ]
+}
