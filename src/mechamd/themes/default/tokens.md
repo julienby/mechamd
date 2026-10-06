@@ -107,6 +107,8 @@ Choisis par le frontmatter (`layout:`), défaut `article`.
 | --- | --- | --- | --- |
 | `article` | billet, page de doc | sommaire (≥ 3 `##`), date, tags, titre `text-5xl` | celui du document |
 | `page` | accueil, vitrine | titre `text-5xl` seul (si pas de `#`) | celui du document |
+| `landing` | page de vente | titre affiche `text-5xl sm:text-6xl` centré, `lead:` optionnel | celui du document |
+| `docs` | documentation | sommaire latéral fixe (≥ `lg`), titre `text-4xl` | celui du document |
 | `notes` | prise de notes, suivi de manip | ligne date + tags, titre `text-4xl` | resserré : `mt-4` entre éléments, `my-8` autour d'un bloc, `mt-12` avant un `h2`, `mt-8` avant un `h3` |
 
 ## Mode sombre

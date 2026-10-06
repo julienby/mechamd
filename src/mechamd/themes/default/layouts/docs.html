@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{# Documentation : sommaire fixe à gauche dès `lg`, colonne de lecture à droite. #}
+{% block main %}
+  <div class="mx-auto max-w-5xl px-4 pb-16 sm:px-6 lg:flex lg:gap-12">
+    {% if page.toc %}
+    <nav aria-label="Sommaire" class="hidden w-48 shrink-0 lg:block">
+      <div class="sticky top-8">
+        <p class="text-xs font-semibold tracking-widest text-stone-500 uppercase dark:text-stone-400">Sur cette page</p>
+        <ol class="mt-3 space-y-2 border-l border-stone-200 text-sm dark:border-stone-800">
+          {% for item in page.toc %}
+          <li><a href="#{{ item.id }}" class="-ml-px block border-l border-transparent pl-4 text-stone-500 transition duration-200 hover:border-indigo-600 hover:text-indigo-700 dark:text-stone-400 dark:hover:border-indigo-300 dark:hover:text-indigo-300">{{ item.text }}</a></li>
+          {% endfor %}
+        </ol>
+      </div>
+    </nav>
+    {% endif %}
+    <article class="mecha-flow min-w-0 flex-1">
+      {% if not page.has_h1 %}
+      <h1 class="mt-4 mb-8 font-serif text-4xl leading-tight font-medium tracking-tight text-balance text-stone-900 dark:text-stone-50">{{ page.title }}</h1>
+      {% endif %}
+{{ content }}
+    </article>
+  </div>
+{% endblock %}
