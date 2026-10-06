@@ -21,6 +21,44 @@ contenu Markdown
   Une variante demandée mais inexistante retombe sur la variante devinée, avec un avertissement.
 - Une directive inconnue ou mal écrite ne casse pas la page : son contenu reste lisible.
 
+## Quelle directive pour quelle intention
+
+| Je veux… | Directive |
+| --- | --- |
+| un grand titre d'accueil, une zone de page | `section` (`.hero`) |
+| des projets, des articles à parcourir | `card` dans un `grid` |
+| quelques chiffres clés | `stats` |
+| les points forts d'une offre | `features` |
+| une équipe, des auteurs | `people` |
+| des questions et réponses | `faq` (une seule : `details`) |
+| des étapes à suivre | `steps` |
+| un déroulé daté | `timeline` |
+| une fiche technique (clé : valeur) | `specs` |
+| comparer deux options | `compare` |
+| une remarque, un conseil, un avertissement | `callout` |
+| une citation, un témoignage | `quote` |
+| des images | `figure` |
+| des liens commentés | `links` |
+| une liste de tâches | `todo` |
+| inviter à agir (contact, essai) | `cta` |
+
+## Construire une page
+
+1. Un fichier `.md` par page ; frontmatter `title`, et `layout: page` pour un accueil
+   (`article` par défaut).
+2. Écrire d'abord le texte en Markdown ; ajouter une directive seulement quand elle
+   apporte une forme.
+3. Commencer par la forme nue (`:::stats` sans attribut) : le moteur devine.
+   N'ajouter `.variante` ou `clé=valeur` que pour corriger.
+4. Page d'accueil type : `section.hero` (titre + lien), `stats` ou `features`, une
+   `section` avec un `grid` de `card`, `faq`, puis `cta` en dernier.
+5. Une liste de directive s'écrit « - élément : précision » ; le détail se met en
+   lignes indentées dessous.
+6. Lier les autres pages avec `[texte](autre.md)` : le lien devient `.html` à la
+   construction.
+7. Vérifier avec `mecha explain page.md` (variante retenue et avertissements par
+   bloc), puis `mecha build`.
+
 Les sections suivantes sont les README des directives disponibles.
 
 ## callout
@@ -149,6 +187,46 @@ Aucun.
 Voir `examples/` : `nu` (cas nu), `trois` (intro, sous-titre dans une colonne),
 `mal-ecrit` (une seule colonne, code avec `#`, variante inconnue), `vide`.
 
+## cta
+
+**Rôle** : un appel à l'action (titre, phrase, bouton), à placer en fin de page.
+
+### Syntaxe
+
+```markdown
+:::cta
+## Une question ? Écrivez-moi.
+Je réponds en général sous deux jours.
+
+[Envoyer un message](mailto:moi@example.org)
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `title` | le premier titre du contenu | — |
+| `action` | le lien seul sur la dernière ligne : `href` et `text` | — |
+| `text` | le reste, rendu en HTML | — |
+
+Pas de variante devinée.
+
+Avertissements : contenu vide ; pas de bouton (dernière ligne qui n'est pas un lien seul).
+
+### Variantes
+
+- `default` : bandeau d'accent centré, titre, phrase, un bouton blanc.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `sans-titre` (phrase et bouton), `mal-ecrit`
+(pas de bouton, variante inconnue), `vide`.
+
 ## details
 
 **Rôle** : un bloc repliable (précision, calcul, journal brut, question de FAQ).
@@ -186,6 +264,87 @@ Avertissement : rien à replier (contenu vide).
 
 Voir `examples/` : `nu` (cas nu), `open` (explicite, `summary=`), `mal-ecrit`
 (pas de titre, variante inconnue), `vide`.
+
+## faq
+
+**Rôle** : une foire aux questions, une question repliable par élément.
+
+### Syntaxe
+
+```markdown
+:::faq
+- Faut-il installer Python ?
+  Non : `install.sh` installe `uv`, qui s'occupe du reste.
+- Le site est-il statique ?
+  Oui, `mecha build` produit du HTML à héberger n'importe où.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `questions[].question` | le texte de l'élément de liste | — |
+| `questions[].answer` | les lignes indentées sous la question, rendues en HTML | — |
+| `intro` | le texte hors de la liste, rendu en HTML | — |
+
+Pas de variante devinée. Pour une seule question repliable, utiliser `details`.
+
+Avertissements : aucune question ; question sans réponse (gardée, sans texte).
+
+### Variantes
+
+- `default` : les questions dans un seul bloc, fermées ; un clic ouvre la réponse.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `intro` (texte avant la liste, réponse sur
+plusieurs paragraphes), `mal-ecrit` (question sans réponse, variante inconnue),
+`vide`.
+
+## features
+
+**Rôle** : les points forts d'un projet ou d'une offre, une tuile par point.
+
+### Syntaxe
+
+```markdown
+:::features
+- Sans réglage : le moteur devine la présentation.
+- Statique : du HTML à héberger n'importe où.
+- Lisible : un fichier Markdown reste un texte.
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `features[].title` | le texte avant `:` ou `\|`, sans le gras | — |
+| `features[].text` | le texte après `:` ou `\|`, puis les lignes indentées, rendus en HTML | — |
+| `intro` | le texte hors de la liste, rendu en HTML | — |
+
+Les colonnes suivent le nombre de points (1, 2, puis 3 au plus). Pas de variante devinée.
+Pour des chiffres, utiliser `stats` ; pour des étapes ordonnées, `steps`.
+
+Avertissements : aucun point ; point sans phrase (gardé, titre seul).
+
+### Variantes
+
+- `default` : une tuile par point (titre, phrase).
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `gras` (titres en gras, texte indenté),
+`mal-ecrit` (point sans phrase, variante inconnue), `vide`.
 
 ## figure
 
@@ -312,6 +471,47 @@ Aucun.
 Voir `examples/` : `nu` (cas nu), `url-nue` (URL nue, lien relatif, titre en
 intro), `mal-ecrit` (`<url>`, séparateurs `--` et `|`, élément sans lien,
 variante inconnue), `vide`.
+
+## people
+
+**Rôle** : une équipe, des intervenants ou des auteurs : nom, rôle, courte présentation.
+
+### Syntaxe
+
+```markdown
+:::people
+- Camille Durand : biologiste
+  Responsable des manips.
+- Alex Martin : électronicien
+:::
+```
+
+### Ce qui est deviné
+
+| Donnée | Source par défaut | Surcharge |
+| --- | --- | --- |
+| `people[].name` | le texte avant `:`, `\|` ou `—`, sans le gras | — |
+| `people[].role` | le texte après le séparateur | — |
+| `people[].initials` | les initiales des deux premiers mots du nom (pastille) | — |
+| `people[].bio` | les lignes indentées, rendues en HTML | — |
+| `intro` | le texte hors de la liste, rendu en HTML | — |
+
+Les colonnes suivent le nombre de personnes (1, 2, puis 3 au plus). Pas de variante devinée.
+
+Avertissements : aucune personne ; personne sans rôle (gardée, nom seul).
+
+### Variantes
+
+- `default` : une carte par personne, pastille d'initiales.
+
+### Attributs
+
+Aucun.
+
+### Exemples
+
+Voir `examples/` : `nu` (cas nu), `bio` (présentations indentées, séparateur `|`),
+`mal-ecrit` (nom seul, variante inconnue), `vide`.
 
 ## quote
 

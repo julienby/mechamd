@@ -378,6 +378,49 @@ Trois façons d'alimenter la carte BOB :
 - à poser près d'une fenêtre
 :::
 
+## faq
+
+Des questions repliables : une liste, la réponse indentée sous chaque question.
+
+:::faq
+- Faut-il installer Python ?
+  Non : `install.sh` installe `uv`, qui s'occupe du reste.
+- Le site est-il statique ?
+  Oui, `mecha build` produit du HTML à héberger n'importe où.
+:::
+
+## features
+
+Les points forts, une tuile par point : « titre : phrase ».
+
+:::features
+- Sans réglage : le moteur devine la présentation.
+- Statique : du HTML à héberger n'importe où.
+- Lisible : un fichier Markdown reste un texte.
+:::
+
+## people
+
+Une équipe : « Nom : rôle », la présentation indentée dessous.
+
+:::people
+- Camille Durand : biologiste
+  Responsable des manips.
+- Alex Martin : électronicien
+  Câblage et firmware.
+:::
+
+## cta
+
+Un appel à l'action : titre, phrase, et un lien seul sur la dernière ligne.
+
+:::cta
+## Une question ? Écrivez-moi.
+Je réponds en général sous deux jours.
+
+[Envoyer un message](mailto:moi@example.org)
+:::
+
 ## Ce qui n'est pas compris
 
 Une directive inconnue ou mal écrite ne casse jamais la page : son texte

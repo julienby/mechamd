@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : aucun, J0 à J4 terminés (pas de PyPI, ADR 0008)
-- Prochaine action : branche `main` (en attente de l'accord de l'humain) ; usage réel sur un vrai site.
+- Prochaine action : usage réel sur un vrai site ; autres directives selon les besoins (voir catalogue élargi).
 
 ## J0 — Fondations
 
@@ -114,4 +114,4 @@ Pistes notées pour plus tard :
 - 2026-10-06 — Serveur sur `http.server`, rechargement par sondage ; `install.sh` (curl) et « Premier site » dans le README.
 - 2026-10-06 — `mecha new` ; installation curl vérifiée dans un conteneur vierge ; tag `v0.1.0`.
 - 2026-10-06 — Usage réel : site `../portfolio` (4 pages) et tuto `docs/tuto-portfolio.md`. Frottements : `uv --directory` crée le dossier dans le dépôt ; textes du portfolio à personnaliser.
-
+- ✅ 2026-10-06 — Catalogue élargi : `faq`, `cta`, `features`, `people` (4 exemples chacun, vitrine) ; `mecha llms` gagne un guide « quelle directive pour quelle intention » et « construire une page » (`llms.txt` régénéré).

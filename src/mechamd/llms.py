@@ -29,6 +29,44 @@ contenu Markdown
   Une variante demandée mais inexistante retombe sur la variante devinée, avec un avertissement.
 - Une directive inconnue ou mal écrite ne casse pas la page : son contenu reste lisible.
 
+## Quelle directive pour quelle intention
+
+| Je veux… | Directive |
+| --- | --- |
+| un grand titre d'accueil, une zone de page | `section` (`.hero`) |
+| des projets, des articles à parcourir | `card` dans un `grid` |
+| quelques chiffres clés | `stats` |
+| les points forts d'une offre | `features` |
+| une équipe, des auteurs | `people` |
+| des questions et réponses | `faq` (une seule : `details`) |
+| des étapes à suivre | `steps` |
+| un déroulé daté | `timeline` |
+| une fiche technique (clé : valeur) | `specs` |
+| comparer deux options | `compare` |
+| une remarque, un conseil, un avertissement | `callout` |
+| une citation, un témoignage | `quote` |
+| des images | `figure` |
+| des liens commentés | `links` |
+| une liste de tâches | `todo` |
+| inviter à agir (contact, essai) | `cta` |
+
+## Construire une page
+
+1. Un fichier `.md` par page ; frontmatter `title`, et `layout: page` pour un accueil
+   (`article` par défaut).
+2. Écrire d'abord le texte en Markdown ; ajouter une directive seulement quand elle
+   apporte une forme.
+3. Commencer par la forme nue (`:::stats` sans attribut) : le moteur devine.
+   N'ajouter `.variante` ou `clé=valeur` que pour corriger.
+4. Page d'accueil type : `section.hero` (titre + lien), `stats` ou `features`, une
+   `section` avec un `grid` de `card`, `faq`, puis `cta` en dernier.
+5. Une liste de directive s'écrit « - élément : précision » ; le détail se met en
+   lignes indentées dessous.
+6. Lier les autres pages avec `[texte](autre.md)` : le lien devient `.html` à la
+   construction.
+7. Vérifier avec `mecha explain page.md` (variante retenue et avertissements par
+   bloc), puis `mecha build`.
+
 Les sections suivantes sont les README des directives disponibles.
 """
 
