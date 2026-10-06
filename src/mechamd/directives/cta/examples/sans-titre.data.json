@@ -1,0 +1,11 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "",
+    "text": "<p>Voir la démonstration.</p>\n",
+    "action": {
+      "href": "https://example.org/demo",
+      "text": "Essayer"
+    }
+  }
+}

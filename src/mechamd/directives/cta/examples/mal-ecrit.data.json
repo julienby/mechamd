@@ -1,0 +1,12 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "Contact",
+    "text": "<p>Écrivez-moi par mail.</p>\n",
+    "action": null
+  },
+  "warnings": [
+    "pas de bouton : terminer par une ligne « [texte](url) »",
+    "variante « grand » (écrite sur le bloc) inexistante ; disponibles : default"
+  ]
+}

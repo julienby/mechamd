@@ -1,0 +1,11 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "Une question ? Écrivez-moi.",
+    "text": "<p>Je réponds sous deux jours.</p>\n",
+    "action": {
+      "href": "mailto:moi@example.org",
+      "text": "Envoyer un message"
+    }
+  }
+}

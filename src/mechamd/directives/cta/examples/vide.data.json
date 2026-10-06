@@ -1,0 +1,11 @@
+{
+  "variant": "default",
+  "data": {
+    "title": "",
+    "text": "",
+    "action": null
+  },
+  "warnings": [
+    "appel à l'action vide : écrire un titre, une phrase et un lien final"
+  ]
+}
