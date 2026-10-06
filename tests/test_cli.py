@@ -81,3 +81,12 @@ def test_version_is_the_package_version(capsys: pytest.CaptureFixture[str]) -> N
     with pytest.raises(SystemExit):
         main(["--version"])
     assert capsys.readouterr().out == f"mechamd {pyproject['project']['version']}\n"
+
+
+def test_mecha_new(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    site = tmp_path / "mon-site"
+    assert main(["new", str(site)]) == 0
+    assert main(["build", str(site)]) == 0
+    assert (site / "dist" / "index.html").exists()
+    assert main(["new", str(site)]) == 1  # ne remplace jamais une page existante
+    assert "existe déjà" in capsys.readouterr().out

@@ -82,6 +82,29 @@ def cmd_llms(args: argparse.Namespace) -> int:
     return 0
 
 
+INDEX_TEMPLATE = """# Bonjour
+
+Ceci est ma première page mechamd.
+
+:::callout
+Modifiez ce fichier : la page se recharge à chaque enregistrement.
+:::
+"""
+
+
+def cmd_new(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    index = Path(args.project) / "index.md"
+    if index.exists():
+        print(f"✗ {index} existe déjà")
+        return 1
+    index.parent.mkdir(parents=True, exist_ok=True)
+    index.write_text(INDEX_TEMPLATE, encoding="utf-8")
+    print(f"✓ {index} créé. Ensuite : mecha serve {args.project}")
+    return 0
+
+
 def cmd_serve(args: argparse.Namespace) -> int:  # pragma: no cover - lance un serveur
     from mechamd.serve import serve
 
@@ -106,6 +129,10 @@ def build_parser() -> argparse.ArgumentParser:
     explain.add_argument("file", help="document mechamd (.md), relatif au projet")
     explain.add_argument("-p", "--project", default=".", help="dossier du projet (défaut : .)")
     explain.set_defaults(func=cmd_explain)
+
+    new = sub.add_parser("new", help="crée un nouveau site avec une page d'exemple")
+    new.add_argument("project", help="dossier à créer")
+    new.set_defaults(func=cmd_new)
 
     build = sub.add_parser("build", help="construit un site statique")
     build.add_argument("project", nargs="?", default=".", help="dossier du projet (défaut : .)")

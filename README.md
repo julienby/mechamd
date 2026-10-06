@@ -26,10 +26,9 @@ mechamd télécharge le binaire Tailwind CSS (réseau requis une fois).
 ## Premier site
 
 ```sh
-mkdir mon-site && cd mon-site
-printf '# Bonjour\n\n:::callout\nÇa marche.\n:::\n' > index.md
-mecha serve        # http://127.0.0.1:8000/, la page se recharge à chaque enregistrement
-mecha build -o dist/   # le site statique (HTML + CSS) est dans dist/
+mecha new mon-site
+mecha serve mon-site          # http://127.0.0.1:8000/, la page se recharge à chaque enregistrement
+mecha build mon-site          # le site statique (HTML + CSS) est dans mon-site/dist/
 ```
 
 Un fichier `.md` = une page. Écrivez du Markdown ; ajoutez un bloc `:::directive` quand vous
