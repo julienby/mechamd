@@ -1,0 +1,9 @@
+{
+  "variant": "default",
+  "data": {
+    "plans": []
+  },
+  "warnings": [
+    "aucune offre : écrire un titre « ## Nom : prix » par offre"
+  ]
+}

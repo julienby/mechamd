@@ -1,0 +1,33 @@
+{
+  "variant": "default",
+  "data": {
+    "plans": [
+      {
+        "name": "Gratuit",
+        "amount": "0 €",
+        "period": "",
+        "points": [
+          "Un site",
+          "Export HTML"
+        ],
+        "action": null,
+        "recommended": false
+      },
+      {
+        "name": "Pro",
+        "amount": "9 €",
+        "period": "/mois",
+        "points": [
+          "Sites illimités",
+          "Domaine perso",
+          "Support prioritaire"
+        ],
+        "action": {
+          "href": "https://example.org/pro",
+          "text": "Choisir Pro"
+        },
+        "recommended": false
+      }
+    ]
+  }
+}

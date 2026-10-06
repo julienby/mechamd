@@ -1,0 +1,38 @@
+{
+  "variant": "default",
+  "data": {
+    "plans": [
+      {
+        "name": "Solo",
+        "amount": "0 €",
+        "period": "",
+        "points": [
+          "Un site"
+        ],
+        "action": null,
+        "recommended": false
+      },
+      {
+        "name": "Pro",
+        "amount": "9 €",
+        "period": "/mois",
+        "points": [
+          "Sites illimités"
+        ],
+        "action": null,
+        "recommended": true
+      },
+      {
+        "name": "Équipe",
+        "amount": "29 €",
+        "period": "/mois",
+        "points": [
+          "Tout Pro",
+          "Comptes partagés"
+        ],
+        "action": null,
+        "recommended": false
+      }
+    ]
+  }
+}
