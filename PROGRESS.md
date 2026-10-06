@@ -5,7 +5,7 @@ Légende : ✅ fait · 🔄 en cours · ⏸️ en attente humaine · ⛔ bloqué
 ## État courant
 
 - Jalon actif : aucun, J0 à J4 terminés (pas de PyPI, ADR 0008)
-- Prochaine action : tag `v0.1.0` si souhaité ; installation depuis GitHub dans un conteneur vierge.
+- Prochaine action : branche `main` (en attente de l'accord de l'humain) ; usage réel sur un vrai site.
 
 ## J0 — Fondations
 
@@ -112,3 +112,4 @@ Pistes notées pour plus tard :
   (`--version` affichait 0.0.1 ; police servie en `application/octet-stream` faute de `/etc/mime.types`).
 - 2026-10-06 — Simplification : PyPI abandonné (workflow, environnement `pypi`), mypy et couverture retirés, CI sur 3.12.
 - 2026-10-06 — Serveur sur `http.server`, rechargement par sondage ; `install.sh` (curl) et « Premier site » dans le README.
+- 2026-10-06 — `mecha new` ; installation curl vérifiée dans un conteneur vierge ; tag `v0.1.0`.
